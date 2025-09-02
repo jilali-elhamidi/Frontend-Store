@@ -2,6 +2,11 @@
 import CategoriesSidebar from '../components/categories/CategoriesSidebar'
 import ProductCard from '../components/ProductCard'
 import CategoriesStrip from '../components/categories/CategoriesStrip'
+import PromoBanners from '../components/PromoBanners'
+import DealsSection from '../components/DealsSection'
+import FashionSaleBanner from '../components/FashionSaleBanner'
+import TrendingTopSelling from '../components/TrendingTopSelling'
+import LatestBlog from '../components/LatestBlog'
 
 export default function CategoriesPage() {
   return (
@@ -26,20 +31,22 @@ export default function CategoriesPage() {
         ]}
       />
 
-      {/* Sidebar + Product grid */}
-      <section className="mx-auto w-full max-w-[1330px] px-4 sm:px-6 lg:px-8 py-8 ml-6 md:ml-10">
-        <div className="flex gap-8 ">
+      {/* Sidebar + Product grid (only) */}
+      <section className="mx-auto w-full max-w-[1330px] px-4 sm:px-6 lg:px-8 py-8">
+        <div className="flex gap-8">
           {/* Left Sidebar */}
-          <CategoriesSidebar />
+          <div className="w-64 lg:w-72 shrink-0">
+            <CategoriesSidebar />
+          </div>
 
           {/* Products */}
-          <div className="min-w-0 flex-1 ">
+          <div className="min-w-0 flex-1">
             {/* Top categories strip */}
-            <div className="mb-6  ">
+            <div className="mb-6">
               <CategoriesStrip />
             </div>
             {/* Sort + count row (placeholder) */}
-            <div className="mb-4 flex items-center justify-between ">
+            <div className="mb-4 flex items-center justify-between">
               <div className="text-sm text-neutral-600">Showing 12 of 48 products</div>
               <div className="text-sm">
                 <label className="mr-2 text-neutral-700">Sort by</label>
@@ -52,7 +59,7 @@ export default function CategoriesPage() {
             </div>
 
             {/* Grid using Best Seller card design */}
-            <div className="flex flex-wrap gap-6 ml-20 md:ml-10">
+            <div className="flex flex-wrap gap-6">
               <ProductCard
                 title="Shorp 49” Class FHD (1080p) Android Led TV"
                 price="$3,029.50"
@@ -97,7 +104,50 @@ export default function CategoriesPage() {
                 ratingCount={21}
               />
             </div>
+
+            {/* Promo banners below product cards */}
+            <div className="mt-8">
+              <PromoBanners
+                left={{
+                  title: 'Digital Smartwatch',
+                  subtitle: '50% OFF',
+                  image:
+                    'https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=900&auto=format&fit=crop',
+                  ctaClassName: '!bg-blue-800 hover:bg-neutral-900',
+                }}
+                right={{
+                  title: 'Men’s Sport Shoes',
+                  subtitle: '70% OFF',
+                  image:
+                    'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=900&auto=format&fit=crop',
+                  ctaClassName: '!bg-blue-300 hover:bg-zinc-300 text-neutral-900',
+                }}
+              />
+            </div>
           </div>
+        </div>
+      </section>
+
+      {/* Standalone full-width sections (same container as header) */}
+      <section className="mx-auto w-full max-w-[1330px] px-4 sm:px-6 lg:px-8 py-6">
+        {/* Day Of The Deal section */}
+        <div className="mt-4">
+          <DealsSection />
+        </div>
+
+        {/* Fashion Sale banner */}
+        <div className="mt-6">
+          <FashionSaleBanner />
+        </div>
+
+        {/* Trending / Top Rated / Top Selling */}
+        <div className="mt-6">
+          <TrendingTopSelling />
+        </div>
+
+        {/* Latest Blog */}
+        <div className="mt-6">
+          <LatestBlog />
         </div>
       </section>
     </main>
