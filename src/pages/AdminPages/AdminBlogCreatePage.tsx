@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import DashboardSidebar from '../components/DashboardSidebar'
+import DashboardSidebar from '../../components/Admin/DashboardSidebar'
 
 const AdminBlogCreatePage: React.FC = () => {
   const [isDark, setIsDark] = useState(false)

@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
 import { FiHeart } from 'react-icons/fi'
 import { MdLocalShipping, MdSecurity } from 'react-icons/md'
-import ProductDescriptionCard from './ProductDescriptionCard'
-import ProductSpecificationsCard from './ProductSpecificationsCard'
-import ProductReviewsCard from './ProductReviewsCard'
-import ProductInfoTabs from './ProductInfoTabs'
-import ProductCard from './ProductCard'
+import ProductDescriptionCard from '../../components/ProductDetail/ProductDescriptionCard'
+import ProductSpecificationsCard from '../../components/ProductDetail/ProductSpecificationsCard'
+import ProductReviewsCard from '../../components/ProductDetail/ProductReviewsCard'
+import ProductInfoTabs from '../../components/ProductDetail/ProductInfoTabs'
+import ProductCard from '../../components/categories/ProductCard'
 
 // ProductDetails component
 // - Responsive container aligned with site width (max-w-[1330px])
@@ -115,9 +115,8 @@ export default function ProductDetails() {
               <button
                 key={i}
                 onClick={() => setActiveImg(i)}
-                className={`relative h-20 w-20 shrink-0 rounded-md overflow-hidden border ${
-                  activeImg === i ? 'border-indigo-500' : 'border-zinc-200'
-                }`}
+                className={`relative h-20 w-20 shrink-0 rounded-md overflow-hidden border ${activeImg === i ? 'border-indigo-500' : 'border-zinc-200'
+                  }`}
                 aria-label={`Thumbnail ${i + 1}`}
               >
                 <img src={src} className="h-full w-full object-cover" alt="thumbnail" />
@@ -170,9 +169,8 @@ export default function ProductDetails() {
                   <button
                     key={c}
                     onClick={() => setColor(c)}
-                    className={`h-8 w-8 rounded-full border ${
-                      color === c ? 'ring-2 ring-offset-2 ring-indigo-500' : ''
-                    }`}
+                    className={`h-8 w-8 rounded-full border ${color === c ? 'ring-2 ring-offset-2 ring-indigo-500' : ''
+                      }`}
                     style={{ backgroundColor: c }}
                     aria-label={`Pick color ${c}`}
                   />
@@ -187,11 +185,10 @@ export default function ProductDetails() {
                   <button
                     key={s}
                     onClick={() => setSize(s)}
-                    className={`px-3 py-1.5 rounded-md border text-sm ${
-                      size === s
-                        ? 'border-neutral-900 text-neutral-900'
-                        : 'border-zinc-200 text-neutral-600 hover:border-neutral-300'
-                    }`}
+                    className={`px-3 py-1.5 rounded-md border text-sm ${size === s
+                      ? 'border-neutral-900 text-neutral-900'
+                      : 'border-zinc-200 text-neutral-600 hover:border-neutral-300'
+                      }`}
                   >
                     {s}
                   </button>
@@ -253,7 +250,7 @@ export default function ProductDetails() {
         </div>
 
         {/* Sidebar info */}
-    
+
       </div>
 
       {/* Related products */}
@@ -274,10 +271,10 @@ export default function ProductDetails() {
                 i % 4 === 0
                   ? [{ label: 'Hot', color: 'red' }]
                   : i % 4 === 1
-                  ? [{ label: '-20%', color: 'orange' }]
-                  : i % 4 === 2
-                  ? [{ label: 'Best Seller', color: 'green' }]
-                  : [{ label: 'Limited', color: 'sky' }]
+                    ? [{ label: '-20%', color: 'orange' }]
+                    : i % 4 === 2
+                      ? [{ label: 'Best Seller', color: 'green' }]
+                      : [{ label: 'Limited', color: 'sky' }]
               }
               ratingCount={124}
               showInstallment={false}
@@ -304,10 +301,10 @@ export default function ProductDetails() {
                 i % 4 === 0
                   ? [{ label: 'Clearance', color: 'red' }]
                   : i % 4 === 1
-                  ? [{ label: 'Promo', color: 'orange' }]
-                  : i % 4 === 2
-                  ? [{ label: 'Top Rated', color: 'green' }]
-                  : [{ label: 'Eco', color: 'sky' }]
+                    ? [{ label: 'Promo', color: 'orange' }]
+                    : i % 4 === 2
+                      ? [{ label: 'Top Rated', color: 'green' }]
+                      : [{ label: 'Eco', color: 'sky' }]
               }
               ratingCount={86}
               showInstallment={false}

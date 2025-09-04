@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import DashboardSidebar from '../components/DashboardSidebar'
+import DashboardSidebar from '../../components/Admin/DashboardSidebar'
 
 export default function AdminOrderDetailsPage() {
   const { id = '#6743' } = useParams()

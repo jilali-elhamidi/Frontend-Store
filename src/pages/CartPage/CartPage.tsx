@@ -1,5 +1,5 @@
-import CartSummary from '../components/CartSummary'
-import ProductCard, { type ProductCardBadge } from '../components/ProductCard'
+import CartSummary from '../../components/Cart/CartSummary'
+import ProductCard, { type ProductCardBadge } from '../../components/categories/ProductCard'
 import { Link } from 'react-router-dom'
 
 export default function CartPage() {
@@ -17,47 +17,47 @@ export default function CartPage() {
     badges: ProductCardBadge[]
     ratingCount?: number
   }> = [
-    {
-      title: 'Mixed Nuts Berries Pack',
-      price: '$56.00',
-      oldPrice: '$60.00',
-      image: 'https://picsum.photos/id/1060/800/800',
-      badges: [{ label: 'SALE', color: 'red' }],
-      ratingCount: 24,
-    },
-    {
-      title: 'Multi Grain Combo Cookies',
-      price: '$26.00',
-      oldPrice: '$29.00',
-      image: 'https://picsum.photos/id/1068/800/800',
-      badges: [{ label: 'SALE', color: 'red' }],
-      ratingCount: 18,
-    },
-    {
-      title: 'Fresh Mango Juice Pack',
-      price: '$55.00',
-      oldPrice: '$64.50',
-      image: 'https://picsum.photos/id/1074/800/800',
-      badges: [],
-      ratingCount: 10,
-    },
-    {
-      title: 'Dates Vuka Fresh Pouch',
-      price: '$85.00',
-      oldPrice: '$99.00',
-      image: 'https://picsum.photos/id/1084/800/800',
-      badges: [{ label: 'HOT', color: 'orange' }],
-      ratingCount: 32,
-    },
-    {
-      title: 'Stick Fiber Masala Magic',
-      price: '$50.00',
-      oldPrice: '$54.00',
-      image: 'https://picsum.photos/id/1080/800/800',
-      badges: [{ label: 'NEW', color: 'sky' }],
-      ratingCount: 6,
-    },
-  ]
+      {
+        title: 'Mixed Nuts Berries Pack',
+        price: '$56.00',
+        oldPrice: '$60.00',
+        image: 'https://picsum.photos/id/1060/800/800',
+        badges: [{ label: 'SALE', color: 'red' }],
+        ratingCount: 24,
+      },
+      {
+        title: 'Multi Grain Combo Cookies',
+        price: '$26.00',
+        oldPrice: '$29.00',
+        image: 'https://picsum.photos/id/1068/800/800',
+        badges: [{ label: 'SALE', color: 'red' }],
+        ratingCount: 18,
+      },
+      {
+        title: 'Fresh Mango Juice Pack',
+        price: '$55.00',
+        oldPrice: '$64.50',
+        image: 'https://picsum.photos/id/1074/800/800',
+        badges: [],
+        ratingCount: 10,
+      },
+      {
+        title: 'Dates Vuka Fresh Pouch',
+        price: '$85.00',
+        oldPrice: '$99.00',
+        image: 'https://picsum.photos/id/1084/800/800',
+        badges: [{ label: 'HOT', color: 'orange' }],
+        ratingCount: 32,
+      },
+      {
+        title: 'Stick Fiber Masala Magic',
+        price: '$50.00',
+        oldPrice: '$54.00',
+        image: 'https://picsum.photos/id/1080/800/800',
+        badges: [{ label: 'NEW', color: 'sky' }],
+        ratingCount: 6,
+      },
+    ]
 
   return (
     <section className="mx-auto w-full max-w-[1330px] px-4 sm:px-6 lg:px-8 py-6">

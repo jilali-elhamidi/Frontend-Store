@@ -50,16 +50,14 @@ export default function ProductInfoTabs() {
             <button
               key={t.id}
               onClick={() => scrollToIndex(t.id)}
-              className={`relative -mb-px py-3 text-sm transition-colors ${
-                active === t.id ? 'text-neutral-900' : 'text-neutral-500 hover:text-neutral-700'
-              }`}
+              className={`relative -mb-px py-3 text-sm transition-colors ${active === t.id ? 'text-neutral-900' : 'text-neutral-500 hover:text-neutral-700'
+                }`}
             >
               {t.label}
               {/* underline indicator */}
               <span
-                className={`pointer-events-none absolute left-0 right-0 -bottom-[1px] h-[2px] rounded bg-neutral-900 transition-opacity ${
-                  active === t.id ? 'opacity-100' : 'opacity-0'
-                }`}
+                className={`pointer-events-none absolute left-0 right-0 -bottom-[1px] h-[2px] rounded bg-neutral-900 transition-opacity ${active === t.id ? 'opacity-100' : 'opacity-0'
+                  }`}
               />
             </button>
           ))}

@@ -1,4 +1,4 @@
-import Checkout from '../components/Checkout'
+import Checkout from '../../components/checkout/Checkout'
 import { Link } from 'react-router-dom'
 
 export default function CheckoutPage() {

@@ -1,12 +1,12 @@
- import CategoriesHero from '../components/categories/CategoriesHero'
-import CategoriesSidebar from '../components/categories/CategoriesSidebar'
-import ProductCard from '../components/ProductCard'
-import CategoriesStrip from '../components/categories/CategoriesStrip'
-import PromoBanners from '../components/PromoBanners'
-import DealsSection from '../components/DealsSection'
-import FashionSaleBanner from '../components/FashionSaleBanner'
-import TrendingTopSelling from '../components/TrendingTopSelling'
-import LatestBlog from '../components/LatestBlog'
+import CategoriesHero from '../../components/categories/CategoriesHero'
+import CategoriesSidebar from '../../components/categories/CategoriesSidebar'
+import ProductCard from '../../components/categories/ProductCard'
+import CategoriesStrip from '../../components/categories/CategoriesStrip'
+import PromoBanners from '../../components/categories/PromoBanners'
+import DealsSection from '../../components/categories/DealsSection'
+import FashionSaleBanner from '../../components/categories/FashionSaleBanner'
+import TrendingTopSelling from '../../components/categories/TrendingTopSelling'
+import LatestBlog from '../../components/categories/LatestBlog'
 
 export default function CategoriesPage() {
   return (

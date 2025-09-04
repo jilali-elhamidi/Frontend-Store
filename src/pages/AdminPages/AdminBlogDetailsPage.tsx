@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import DashboardSidebar from '../components/DashboardSidebar'
+import DashboardSidebar from '../../components/Admin/DashboardSidebar'
 
 const AdminBlogDetailsPage: React.FC = () => {
   const [isDark, setIsDark] = useState(false)
@@ -71,7 +71,7 @@ const AdminBlogDetailsPage: React.FC = () => {
 
                     {/* Author + read time */}
                     <div className="w-60 h-10 left-[79.98px] top-[435.88px] absolute justify-center">
-                      <span className={`${textSub} text-sm font-medium font-['Inter'] leading-snug`}>By Jie Yan Song • February 1, 2024<br/></span>
+                      <span className={`${textSub} text-sm font-medium font-['Inter'] leading-snug`}>By Jie Yan Song • February 1, 2024<br /></span>
                       <span className={`${textMuted} text-sm font-normal font-['Inter'] leading-snug`}>5 min read</span>
                     </div>
                     <div className={`w-10 h-10 left-[23.99px] top-[435.62px] absolute ${isDark ? 'bg-slate-700' : 'bg-gray-200'} rounded-[20px] overflow-hidden`}>
@@ -110,7 +110,7 @@ const AdminBlogDetailsPage: React.FC = () => {
                       <div className="w-2 h-4 left-[81.22px] top-[57.08px] absolute justify-center text-stone-100 text-sm font-normal font-['Roboto_Mono'] leading-tight [text-shadow:_0px_1px_0px_rgb(0_0_0_/_0.30)]">=</div>
                       <div className="w-4 h-4 left-[98.02px] top-[57.08px] absolute justify-center text-stone-100 text-sm font-normal font-['Roboto_Mono'] leading-tight [text-shadow:_0px_1px_0px_rgb(0_0_0_/_0.30)]">()</div>
                       <div className="w-4 h-4 left-[123.23px] top-[57.08px] absolute justify-center text-stone-100 text-sm font-normal font-['Roboto_Mono'] leading-tight [text-shadow:_0px_1px_0px_rgb(0_0_0_/_0.30)]">=&gt;</div>
-                      <div className="w-6 h-4 left-[148.44px] top-[57.08px] absolute justify-center text-stone-100 text-sm font-normal font-['Roboto_Mono'] leading-tight [text-shadow:_0px_1px_0px_rgb(0_0_0_/_0.30)]">{};</div>
+                      <div className="w-6 h-4 left-[148.44px] top-[57.08px] absolute justify-center text-stone-100 text-sm font-normal font-['Roboto_Mono'] leading-tight [text-shadow:_0px_1px_0px_rgb(0_0_0_/_0.30)]">{ };</div>
                     </div>
 
                     <div className={`w-80 h-5 left-[123.99px] top-[1343.96px] absolute ${textSub} text-base font-normal font-['Inter'] leading-normal`}>
@@ -244,21 +244,21 @@ const AdminBlogDetailsPage: React.FC = () => {
                   </div>
 
                   {/* Top translucent header strip */}
-                    <div className={`w-[1447px] h-24 left-[-24px] top-[-30px] absolute ${isDark ? 'bg-slate-900/60' : 'bg-white/80'} backdrop-blur-[3px]`}>
-                      {/* Right icon group */}
+                  <div className={`w-[1447px] h-24 left-[-24px] top-[-30px] absolute ${isDark ? 'bg-slate-900/60' : 'bg-white/80'} backdrop-blur-[3px]`}>
+                    {/* Right icon group */}
                     <div className="absolute right-6 top-6 h-20 flex items-center gap-3">
                       {/* Bell */}
                       <button className="relative w-15 h-15 rounded-full flex items-center justify-center bg-transparent hover:bg-black/5 dark:hover:bg-white/10 z-20 transition-transform duration-200 hover:scale-105 active:scale-95" aria-label="Notifications">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className={`w-7 h-7 ${isDark ? 'text-slate-200' : 'text-slate-700'}`}>
-                          <path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0 1 18 14.158V11a6 6 0 1 0-12 0v3.159c0 .538-.214 1.055-.595 1.436L4 17h5"/>
-                          <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                          <path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0 1 18 14.158V11a6 6 0 1 0-12 0v3.159c0 .538-.214 1.055-.595 1.436L4 17h5" />
+                          <path d="M13.73 21a2 2 0 0 1-3.46 0" />
                         </svg>
                         <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-red-500 text-white text-[10px] leading-5 text-center">2</span>
                       </button>
                       {/* Chat */}
                       <button className="w-15 h-15 rounded-full flex items-center justify-center bg-transparent hover:bg-black/5 dark:hover:bg-white/10 z-20 transition-transform duration-200 hover:scale-105 active:scale-95" aria-label="Messages">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className={`w-7 h-7 ${isDark ? 'text-slate-200' : 'text-slate-700'}`}>
-                          <path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/>
+                          <path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z" />
                         </svg>
                       </button>
                       {/* Avatar */}

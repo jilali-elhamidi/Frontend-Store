@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
-import DashboardSidebar from '../components/DashboardSidebar'
+import DashboardSidebar from '../../components/Admin/DashboardSidebar'
 
 export default function AdminProductsPage() {
   const [isDark, setIsDark] = useState<boolean>(false)
@@ -75,7 +75,7 @@ export default function AdminProductsPage() {
   }
 
   const ProductCard = ({ product }: { product: Product }) => (
-    <div className={`w-full md:w-80 h-full p-4 ${subtleCardBg} rounded-2xl inline-flex flex-col justify-start items-start gap-4 transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5`}> 
+    <div className={`w-full md:w-80 h-full p-4 ${subtleCardBg} rounded-2xl inline-flex flex-col justify-start items-start gap-4 transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5`}>
       <div className="self-stretch inline-flex justify-start items-start gap-4 min-h-20">
         <div className="w-20 h-20 rounded-lg overflow-hidden">
           <img
@@ -185,21 +185,19 @@ export default function AdminProductsPage() {
                   </div>
                   <button
                     onClick={() => setShowFilters((v) => !v)}
-                    className={`h-9 px-3 rounded-lg outline outline-1 transition-colors text-sm flex items-center ${
-                      isDark
-                        ? 'bg-slate-800 hover:bg-slate-700 outline-slate-700 text-slate-200'
-                        : 'bg-white hover:bg-neutral-50 outline-neutral-300 text-neutral-700'
-                    } dark:bg-slate-800 dark:hover:bg-slate-700 dark:outline-slate-700 dark:text-slate-200`}
+                    className={`h-9 px-3 rounded-lg outline outline-1 transition-colors text-sm flex items-center ${isDark
+                      ? 'bg-slate-800 hover:bg-slate-700 outline-slate-700 text-slate-200'
+                      : 'bg-white hover:bg-neutral-50 outline-neutral-300 text-neutral-700'
+                      } dark:bg-slate-800 dark:hover:bg-slate-700 dark:outline-slate-700 dark:text-slate-200`}
                   >
                     <span className="inline-block translate-y-[1px]">{showFilters ? 'Hide Filters' : 'Show Filters'}</span>
                   </button>
                   <Link
                     to="/admin/products/new"
-                    className={`h-9 px-3 rounded-lg outline outline-1 transition-colors text-sm flex items-center ${
-                      isDark
-                        ? 'bg-slate-800 hover:bg-slate-700 outline-slate-700 text-slate-200'
-                        : 'bg-white hover:bg-neutral-50 outline-neutral-300 text-black'
-                    } dark:bg-slate-800 dark:hover:bg-slate-700 dark:outline-slate-700 dark:text-slate-200`}
+                    className={`h-9 px-3 rounded-lg outline outline-1 transition-colors text-sm flex items-center ${isDark
+                      ? 'bg-slate-800 hover:bg-slate-700 outline-slate-700 text-slate-200'
+                      : 'bg-white hover:bg-neutral-50 outline-neutral-300 text-black'
+                      } dark:bg-slate-800 dark:hover:bg-slate-700 dark:outline-slate-700 dark:text-slate-200`}
                   >
                     Create Product
                   </Link>
@@ -226,7 +224,7 @@ export default function AdminProductsPage() {
                       <div className="justify-start text-white text-sm font-medium font-['Inter'] uppercase tracking-tight">1</div>
                     </div>
                   </div>
-                  {[2,3,4].map(n => (
+                  {[2, 3, 4].map(n => (
                     <div key={n} className="inline-flex flex-col justify-start items-start gap-2.5">
                       <div className={`h-8 px-4 py-2 rounded-lg outline outline-1 outline-offset-[-1px] ${isDark ? 'outline-slate-700' : 'outline-neutral-800'} inline-flex justify-center items-center gap-1`}>
                         <div className={`justify-start ${textSub} text-sm font-medium font-['Inter'] uppercase tracking-tight`}>{n}</div>
@@ -270,19 +268,17 @@ export default function AdminProductsPage() {
                         <button
                           key={name}
                           onClick={() => toggleCat(name)}
-                          className={`w-52 inline-flex justify-between items-center rounded-xl px-4 py-2 transition-colors ${
-                            isDark
-                              ? `${active ? 'bg-slate-800' : 'bg-slate-800/60 hover:bg-slate-700/60'} outline outline-1 outline-slate-700`
-                              : `${active ? 'bg-neutral-100' : 'bg-white hover:bg-neutral-50'} outline outline-1 outline-neutral-200`
-                          } dark:bg-slate-800/60 dark:hover:bg-slate-700/60 dark:outline dark:outline-1 dark:outline-slate-700 ${active ? 'dark:bg-slate-800' : ''}`}
+                          className={`w-52 inline-flex justify-between items-center rounded-xl px-4 py-2 transition-colors ${isDark
+                            ? `${active ? 'bg-slate-800' : 'bg-slate-800/60 hover:bg-slate-700/60'} outline outline-1 outline-slate-700`
+                            : `${active ? 'bg-neutral-100' : 'bg-white hover:bg-neutral-50'} outline outline-1 outline-neutral-200`
+                            } dark:bg-slate-800/60 dark:hover:bg-slate-700/60 dark:outline dark:outline-1 dark:outline-slate-700 ${active ? 'dark:bg-slate-800' : ''}`}
                         >
                           <div className={`justify-start ${textSub} text-base font-semibold font-['Open_Sans'] ${active ? 'underline' : ''}`}>{name}</div>
-                          <div className={`w-10 h-9 p-2 ${
-                            active
-                              ? (isDark ? 'bg-sky-700 text-white' : 'bg-sky-900 text-white')
-                              : (isDark ? 'bg-slate-800 text-slate-200' : 'bg-stone-200 text-neutral-800')
-                          } dark:bg-slate-800 dark:text-slate-200 ${active ? 'dark:bg-sky-700 dark:text-white' : ''} rounded inline-flex flex-col justify-center items-center gap-2.5`}>
-                            <div className={`justify-start text-sm font-semibold font-['Open_Sans']`}>{String(count).padStart(2,'0')}</div>
+                          <div className={`w-10 h-9 p-2 ${active
+                            ? (isDark ? 'bg-sky-700 text-white' : 'bg-sky-900 text-white')
+                            : (isDark ? 'bg-slate-800 text-slate-200' : 'bg-stone-200 text-neutral-800')
+                            } dark:bg-slate-800 dark:text-slate-200 ${active ? 'dark:bg-sky-700 dark:text-white' : ''} rounded inline-flex flex-col justify-center items-center gap-2.5`}>
+                            <div className={`justify-start text-sm font-semibold font-['Open_Sans']`}>{String(count).padStart(2, '0')}</div>
                           </div>
                         </button>
                       )

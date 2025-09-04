@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import DashboardSidebar from '../components/DashboardSidebar'
+import DashboardSidebar from '../../components/Admin/DashboardSidebar'
 
 export default function AdminProductCreatePage() {
   const [isDark, setIsDark] = useState<boolean>(false)
@@ -156,7 +156,7 @@ export default function AdminProductCreatePage() {
                     {/* Upload zone */}
                     <label className={`p-4 rounded-lg outline outline-1 ${outline} border-dashed flex flex-col justify-center items-center gap-3 w-full cursor-pointer transition-colors ${isDark ? 'bg-slate-900/60 hover:bg-slate-900/50' : 'bg-white hover:bg-neutral-50'}`}>
                       <div className="w-12 h-12 rounded-full flex items-center justify-center bg-indigo-600/10 text-indigo-600">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="17 8 12 3 7 8" /><line x1="12" y1="3" x2="12" y2="15" /></svg>
                       </div>
                       <div className={`text-center ${isDark ? 'text-slate-300' : 'text-neutral-600'} text-sm font-medium`}>Drop images here, or click to browse</div>
                       <input type="file" accept="image/*" multiple className="hidden" onChange={handleFilesSelected} />

@@ -93,11 +93,10 @@ export default function ProductReviewsCard() {
           <button
             type="submit"
             disabled={!userName.trim() || !userText.trim() || submitting}
-            className={`inline-flex items-center px-4 py-2 rounded-md text-sm text-white transition-colors ${
-              !userName.trim() || !userText.trim() || submitting
-                ? 'bg-neutral-400 cursor-not-allowed'
-                : 'bg-neutral-900 hover:bg-neutral-800'
-            }`}
+            className={`inline-flex items-center px-4 py-2 rounded-md text-sm text-white transition-colors ${!userName.trim() || !userText.trim() || submitting
+              ? 'bg-neutral-400 cursor-not-allowed'
+              : 'bg-neutral-900 hover:bg-neutral-800'
+              }`}
           >
             {submitting ? 'Submitting…' : 'Submit review'}
           </button>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import DashboardSidebar from '../components/DashboardSidebar'
-import RecentPurchases from '../components/RecentPurchases'
+import DashboardSidebar from '../../components/Admin/DashboardSidebar'
+import RecentPurchases from '../../components/Admin/Order/RecentPurchases'
 
 export default function AdminOrdersPage() {
   const [isDark, setIsDark] = useState<boolean>(false)
@@ -24,10 +24,10 @@ export default function AdminOrdersPage() {
   const outline = isDark ? 'outline-slate-600/40' : 'outline-neutral-800/20'
   const border = isDark ? 'border-slate-700/50' : 'border-neutral-800/20'
   const rows = [
-    { id: '#25426', date: 'Nov 8th,2023', name: 'Kavin',  status: 'Delivered', statusDot: 'bg-emerald-200', amt: '₹200.00', avatarUrl: 'https://i.pravatar.cc/48?u=kavin' },
-    { id: '#25425', date: 'Nov 7th,2023', name: 'Komael', status: 'Canceled',  statusDot: 'bg-orange-400',  amt: '₹200.00', avatarUrl: 'https://i.pravatar.cc/48?u=komael' },
+    { id: '#25426', date: 'Nov 8th,2023', name: 'Kavin', status: 'Delivered', statusDot: 'bg-emerald-200', amt: '₹200.00', avatarUrl: 'https://i.pravatar.cc/48?u=kavin' },
+    { id: '#25425', date: 'Nov 7th,2023', name: 'Komael', status: 'Canceled', statusDot: 'bg-orange-400', amt: '₹200.00', avatarUrl: 'https://i.pravatar.cc/48?u=komael' },
     { id: '#25424', date: 'Nov 6th,2023', name: 'Nikhil', status: 'Delivered', statusDot: 'bg-emerald-200', amt: '₹200.00', avatarUrl: 'https://i.pravatar.cc/48?u=nikhil' },
-    { id: '#25423', date: 'Nov 5th,2023', name: 'Shivam', status: 'Canceled',  statusDot: 'bg-orange-400',  amt: '₹200.00', avatarUrl: 'https://i.pravatar.cc/48?u=shivam' },
+    { id: '#25423', date: 'Nov 5th,2023', name: 'Shivam', status: 'Canceled', statusDot: 'bg-orange-400', amt: '₹200.00', avatarUrl: 'https://i.pravatar.cc/48?u=shivam' },
     { id: '#25422', date: 'Nov 4th,2023', name: 'Shadab', status: 'Delivered', statusDot: 'bg-emerald-200', amt: '₹200.00', avatarUrl: 'https://i.pravatar.cc/48?u=shadab' },
   ]
 

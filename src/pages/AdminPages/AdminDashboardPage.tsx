@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
-import DashboardSidebar from '../components/DashboardSidebar'
-import StatCard from '../components/StatCard'
-import Inbox from '../components/Inbox'
-import RecentActivity from '../components/RecentActivity'
-import TrendsCard from '../components/TrendsCard'
+import DashboardSidebar from '../../components/Admin/DashboardSidebar'
+import StatCard from '../../components/Admin/Dashboard/StatCard'
+import Inbox from '../../components/Admin/Dashboard/Inbox'
+import RecentActivity from '../../components/Admin/Dashboard/RecentActivity'
+import TrendsCard from '../../components/Admin/Dashboard/TrendsCard'
 
 export default function AdminDashboardPage() {
   const [isDark, setIsDark] = useState<boolean>(false)

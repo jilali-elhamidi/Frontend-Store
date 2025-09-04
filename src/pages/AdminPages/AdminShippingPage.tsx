@@ -1,5 +1,5 @@
 import React from 'react'
-import DashboardSidebar from '../components/DashboardSidebar'
+import DashboardSidebar from '../../components/Admin/DashboardSidebar'
 
 export default function AdminShippingPage() {
   return (
