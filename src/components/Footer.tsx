@@ -22,8 +22,8 @@ function FeatureItem({ icon, title }: { icon: React.ReactNode; title: string }) 
 
 function Footer() {
   return (
-    <footer className="bg-white">
-      <section className="mx-auto w-full max-w-[1330px] px-4 sm:px-6 lg:px-8 ml-6 md:ml-20">
+    <footer className="bg-white ">
+      <section className="mx-auto w-full max-w-[1330px] px-4 sm:px-6 lg:px-8 -ml-20 md:-ml-6">
         {/* Top feature bar */}
         <div className="relative w-full">
           <div className="h-32 w-full border-b border-zinc-200 flex items-center justify-between">

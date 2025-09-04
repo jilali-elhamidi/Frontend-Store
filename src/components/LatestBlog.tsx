@@ -34,7 +34,7 @@ export default function LatestBlog({ items }: { items?: Blog[] }) {
     ]
 
   return (
-    <section className="mx-auto w-full max-w-[1330px] px-4 sm:px-6 lg:px-8 py-6">
+    <section className="mx-auto w-full max-w-[1330px] px-4 sm:px-6 lg:px-8 py-6 -ml-20 md:-ml-6">
       <div className="flex items-end justify-between">
         <div>
           <h2 className="text-2xl font-bold tracking-tight">
