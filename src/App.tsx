@@ -3,6 +3,7 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import ProductDetails from './components/ProductDetails'
 import { Routes, Route, useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
 import HomePage from './pages/HomePage'
 import CategoriesPage from './pages/CategoriesPage'
 import OrdersPage from './pages/OrdersPage'
@@ -11,6 +12,16 @@ import CartPage from './pages/CartPage'
 import SignupPage from './pages/SignupPage'
 import LoginPage from './pages/LoginPage'
 import AdminDashboardPage from './pages/AdminDashboardPage'
+import AdminOrdersPage from './pages/AdminOrdersPage'
+import AdminOrderDetailsPage from './pages/AdminOrderDetailsPage'
+import AdminProductsPage from './pages/AdminProductsPage'
+import AdminProductDetailsPage from './pages/AdminProductDetailsPage'
+import AdminProductCreatePage from './pages/AdminProductCreatePage'
+import AdminBlogListPage from './pages/AdminBlogListPage'
+import AdminBlogDetailsPage from './pages/AdminBlogDetailsPage'
+import AdminBlogCreatePage from './pages/AdminBlogCreatePage'
+import AdminChatPage from './pages/AdminChatPage'
+import AdminShippingPage from './pages/AdminShippingPage'
 
 function App() {
   const location = useLocation()
@@ -18,8 +29,25 @@ function App() {
     location.pathname.startsWith('/pages/signup') ||
     location.pathname.startsWith('/pages/login') ||
     location.pathname.startsWith('/admin')
+
+  // Ensure the 'dark' class is applied globally based on saved preference or system setting
+  useEffect(() => {
+    const saved = localStorage.getItem('theme')
+    const systemPrefersDark = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+    const preferDark = saved ? saved === 'dark' : systemPrefersDark
+    document.documentElement.classList.toggle('dark', !!preferDark)
+
+    const mql = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null
+    const onChange = (e: MediaQueryListEvent) => {
+      if (!localStorage.getItem('theme')) {
+        document.documentElement.classList.toggle('dark', e.matches)
+      }
+    }
+    mql?.addEventListener?.('change', onChange)
+    return () => mql?.removeEventListener?.('change', onChange)
+  }, [])
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-slate-900">
       {!hideChrome && <Header />}
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -31,6 +59,16 @@ function App() {
         <Route path="/pages/signup" element={<SignupPage />} />
         <Route path="/pages/login" element={<LoginPage />} />
         <Route path="/admin" element={<AdminDashboardPage />} />
+        <Route path="/admin/products" element={<AdminProductsPage />} />
+        <Route path="/admin/products/new" element={<AdminProductCreatePage />} />
+        <Route path="/admin/products/:id" element={<AdminProductDetailsPage />} />
+        <Route path="/admin/orders" element={<AdminOrdersPage />} />
+        <Route path="/admin/orders/:id" element={<AdminOrderDetailsPage />} />
+        <Route path="/admin/blog" element={<AdminBlogListPage />} />
+        <Route path="/admin/blog/details" element={<AdminBlogDetailsPage />} />
+        <Route path="/admin/blog/create" element={<AdminBlogCreatePage />} />
+        <Route path="/admin/chat" element={<AdminChatPage />} />
+        <Route path="/admin/shipping" element={<AdminShippingPage />} />
       </Routes>
       {!hideChrome && <Footer />}
     </div>
@@ -38,3 +76,4 @@ function App() {
 }
 
 export default App
+

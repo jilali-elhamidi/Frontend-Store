@@ -7,7 +7,6 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
-  Area,
 } from 'recharts'
 
 type TrendPoint = { name: string; today: number; yesterday: number }
@@ -46,33 +45,42 @@ function ActiveDot(props: any) {
   )
 }
 
-export default function TrendsCard() {
+type TrendsCardProps = { isDark?: boolean }
+
+export default function TrendsCard({ isDark = false }: TrendsCardProps) {
   // Compute the max point on 'today' to display value callout
   let highlightIndex = 0
   let maxVal = -Infinity
+  let yHighlightIndex = 0
+  let yMaxVal = -Infinity
   data.forEach((p, i) => {
     if (p.today > maxVal) {
       maxVal = p.today
       highlightIndex = i
     }
+    if (p.yesterday > yMaxVal) {
+      yMaxVal = p.yesterday
+      yHighlightIndex = i
+    }
   })
   const highlightValue = maxVal
+  const yesterdayHighlightValue = yMaxVal
 
   return (
-    <section className="w-full rounded-2xl bg-white shadow-[0px_2px_10px_0px_rgba(175,137,255,0.15)] p-4">
+    <section className={`w-full rounded-2xl shadow-[0px_2px_10px_0px_rgba(175,137,255,0.15)] p-4 ${isDark ? 'bg-black' : 'bg-white'} dark:bg-black`}>
       {/* Header */}
       <div className="flex items-start justify-between mb-3">
         <div>
-          <h3 className="text-gray-900 font-semibold">Today's trends</h3>
-          <div className="text-xs text-gray-400">30 Sept 2021</div>
+          <h3 className={`font-semibold ${isDark ? 'text-slate-100' : 'text-gray-900'} dark:text-slate-100`}>Today vs Yesterday</h3>
+          <div className="text-xs text-gray-400 dark:text-slate-400">30 Sept 2021</div>
         </div>
-        <div className="flex items-center gap-4 text-xs font-semibold text-gray-400">
+        <div className="flex items-center gap-4 text-xs font-semibold text-gray-400 dark:text-slate-400">
           <span className="flex items-center gap-2">
             <span className="inline-block w-5 border-t-2 border-blue-600" />
             Today
           </span>
           <span className="flex items-center gap-2">
-            <span className="inline-block w-4 border-t-2 border-zinc-300" />
+            <span className={`inline-block w-4 border-t-2 ${isDark ? 'border-pink-600' : 'border-zinc-300'}`} />
             Yesterday
           </span>
         </div>
@@ -86,20 +94,27 @@ export default function TrendsCard() {
                 <stop offset="0%" stopColor="#2563eb" stopOpacity={1} />
                 <stop offset="100%" stopColor="#2563eb" stopOpacity={0.2} />
               </linearGradient>
-              <linearGradient id="yesterdayFill" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#2563eb" stopOpacity={0.15} />
-                <stop offset="100%" stopColor="#2563eb" stopOpacity={0} />
+              <linearGradient id="yesterdayStroke" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor={isDark ? '#e11d48' : '#9ca3af'} stopOpacity={1} />
+                <stop offset="100%" stopColor={isDark ? '#e11d48' : '#9ca3af'} stopOpacity={isDark ? 0.25 : 0.4} />
               </linearGradient>
             </defs>
 
-            <CartesianGrid stroke="#e5e7eb" strokeOpacity={0.8} vertical={false} />
-            <XAxis dataKey="name" tick={{ fill: '#9ca3af', fontSize: 12 }} axisLine={false} tickLine={false} />
-            <YAxis tick={{ fill: '#9ca3af', fontSize: 12 }} axisLine={false} tickLine={false} width={28} />
-            <Tooltip contentStyle={{ borderRadius: 8, borderColor: '#e5e7eb' }} />
-            <Legend wrapperStyle={{ paddingTop: 8 }} />
+            <CartesianGrid stroke={isDark ? '#334155' : '#e5e7eb'} strokeOpacity={0.8} vertical={false} />
+            <XAxis dataKey="name" tick={{ fill: isDark ? '#94a3b8' : '#9ca3af', fontSize: 12 }} axisLine={false} tickLine={false} />
+            <YAxis tick={{ fill: isDark ? '#94a3b8' : '#9ca3af', fontSize: 12 }} axisLine={false} tickLine={false} width={28} />
+            <Tooltip contentStyle={{ borderRadius: 8, borderColor: isDark ? '#334155' : '#e5e7eb' }} />
+            <Legend wrapperStyle={{ paddingTop: 8, color: isDark ? '#94a3b8' : '#9ca3af' }} />
 
-            {/* Yesterday (area) */}
-            <Area type="monotone" dataKey="yesterday" stroke="#9ca3af" strokeOpacity={0.4} fill="url(#yesterdayFill)" strokeWidth={2} dot={false} activeDot={false} />
+            {/* Yesterday */}
+            <Line
+              type="monotone"
+              dataKey="yesterday"
+              stroke="url(#yesterdayStroke)"
+              strokeWidth={3}
+              dot={false}
+              activeDot={false}
+            />
 
             {/* Today */}
             <Line
@@ -115,10 +130,17 @@ export default function TrendsCard() {
 
         {/* Value callout near highlight point */}
         <div
-          className="absolute -translate-x-1/2 -translate-y-full bg-white text-gray-800 text-sm font-semibold rounded-md px-2 py-1 shadow"
+          className="absolute -translate-x-1/2 -translate-y-full bg-white text-gray-800 text-sm font-semibold rounded-md px-2 py-1 shadow dark:bg-slate-900 dark:text-slate-100 dark:border dark:border-slate-700"
           style={{ left: `${(highlightIndex / (data.length - 1)) * 100}%`, top: '40%' }}
         >
           {highlightValue}
+        </div>
+        {/* Yesterday value callout */}
+        <div
+          className="absolute -translate-x-1/2 -translate-y-full bg-white text-gray-600 text-sm font-semibold rounded-md px-2 py-1 shadow dark:bg-slate-900 dark:text-slate-300 dark:border dark:border-slate-700"
+          style={{ left: `${(yHighlightIndex / (data.length - 1)) * 100}%`, top: '70%' }}
+        >
+          {yesterdayHighlightValue}
         </div>
       </div>
     </section>
