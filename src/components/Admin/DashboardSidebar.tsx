@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 type DashboardSidebarProps = {
   isDark?: boolean
   active?: 'dashboard' | 'order' | 'products' | 'shipping' | 'payments' | 'settings' | 'blog'
@@ -17,9 +18,9 @@ export default function DashboardSidebar({ isDark = false, active = 'dashboard' 
   const activeTextDark = 'text-slate-900'
   const inactiveTextDark = 'text-slate-300'
   return (
-    <aside className={`w-58 h-screen sticky top-0 p-2.5 flex flex-col gap-4 border-r flex-shrink-0 ${isDark ? 'bg-blue-950 border-blue-900' : 'bg-white border-neutral-200'} dark:bg-blue-950 dark:border-blue-900`}>
+    <aside className={`w-58 h-screen sticky top-0 p-2.5 flex flex-col gap-4 border-r flex-shrink-0 overflow-x-hidden ${isDark ? 'bg-blue-950 border-blue-900' : 'bg-white border-neutral-200'} dark:bg-blue-950 dark:border-blue-900`}>
       {/* Top icon block (as provided) */}
-      <div className="w-12 h-12 relative overflow-hidden ml-6 md:ml-22">
+      <div className="w-12 h-12 relative overflow-hidden mx-auto">
         <div className={`w-9 h-10 left-[6.25px] top-[4.17px] absolute flex items-center justify-center ${isDark ? 'text-amber-300' : 'text-indigo-900'} dark:text-amber-300 transition-colors duration-200`}>
           {/* Power icon */}
           <svg viewBox="0 0 24 24" className="w-full h-full" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -29,15 +30,24 @@ export default function DashboardSidebar({ isDark = false, active = 'dashboard' 
         </div>
       </div>
 
-      {/* Menu block (as provided with absolute positions inside a relative wrapper) */}
-      <div className="w-36 relative overflow-y-auto flex-1">
+      {/* Menu block (centered inside the sidebar) */}
+      <div className="w-36 relative overflow-y-auto hide-scrollbar overflow-x-hidden flex-1 mx-auto">
         {/* Active pill */}
         <div
-          className={`w-36 h-10 left-0 absolute rounded-lg shadow-[0px_4px_10px_0px_rgba(175,137,255,0.15)] ${isDark ? 'bg-amber-400' : 'bg-slate-50'} dark:bg-amber-400 transition-transform transition-colors duration-200 hover:shadow-lg hover:scale-[1.01]`}
+          className={`w-36 h-10 left-0 absolute rounded-lg shadow-[0px_4px_10px_0px_rgba(175,137,255,0.15)] ${isDark ? 'bg-amber-400' : 'bg-indigo-100'} dark:bg-amber-400 transition-colors duration-200 hover:shadow-lg`}
           style={{ top: pillTop }}
         />
-        <div className={`left-[51px] top-[10px] absolute justify-start text-sm font-medium font-['Poppins'] ${isDark ? (active === 'dashboard' ? activeTextDark : inactiveTextDark) : 'text-indigo-900'} transition-all duration-200 hover:translate-x-0.5`}>Dashboard</div>
-        <div className={`w-4 h-4 left-[11px] top-[11px] absolute ${isDark ? (active === 'dashboard' ? activeTextDark : inactiveTextDark) : 'text-indigo-900'} transition-all duration-200`}>
+        {/* Clickable overlay links for each item */}
+        <Link to="/admin" className="absolute left-0 w-36 h-10" style={{ top: 0 }} aria-label="Dashboard" />
+        <Link to="/admin/orders" className="absolute left-0 w-36 h-10" style={{ top: 72 }} aria-label="Orders" />
+        <Link to="/admin/products" className="absolute left-0 w-36 h-10" style={{ top: 145 }} aria-label="Products" />
+        <Link to="/admin/shipping" className="absolute left-0 w-36 h-10" style={{ top: 217 }} aria-label="Shipping" />
+        {/* Payments and Settings routes aren't defined; keep them pointing to /admin for now */}
+        <Link to="/admin" className="absolute left-0 w-36 h-10" style={{ top: 289 }} aria-label="Payments" />
+        <Link to="/admin" className="absolute left-0 w-36 h-10" style={{ top: 361 }} aria-label="Settings" />
+        <Link to="/admin/blog" className="absolute left-0 w-36 h-10" style={{ top: 433 }} aria-label="Blog" />
+        <div className={`top-[10px] absolute left-[32px] w-28 text-left text-sm font-medium font-['Poppins'] ${isDark ? (active === 'dashboard' ? activeTextDark : inactiveTextDark) : (active === 'dashboard' ? 'text-indigo-900' : 'text-indigo-300')} transition-colors duration-200`}>Dashboard</div>
+        <div className={`w-4 h-4 left-[8px] top-[11px] absolute ${isDark ? (active === 'dashboard' ? activeTextDark : inactiveTextDark) : (active === 'dashboard' ? 'text-indigo-900' : 'text-indigo-300')} transition-colors duration-200`}>
           {/* Dashboard grid icon */}
           <svg viewBox="0 0 24 24" className="w-full h-full" fill="currentColor">
             <rect x="3" y="3" width="8" height="8" rx="1"></rect>
@@ -47,7 +57,7 @@ export default function DashboardSidebar({ isDark = false, active = 'dashboard' 
           </svg>
         </div>
 
-        <div className={`w-5 h-5 left-[10px] top-[84px] absolute ${isDark ? (active === 'order' ? activeTextDark : inactiveTextDark) : 'text-indigo-300'} transition-colors duration-200 hover:translate-x-0.5`}>
+        <div className={`w-5 h-5 left-[8px] top-[84px] absolute ${isDark ? (active === 'order' ? activeTextDark : inactiveTextDark) : (active === 'order' ? 'text-indigo-900' : 'text-indigo-300')} transition-colors duration-200`}>
           {/* Orders clipboard icon */}
           <svg viewBox="0 0 24 24" className="w-full h-full" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M9 3h6a2 2 0 0 1 2 2v2H7V5a2 2 0 0 1 2-2z" />
@@ -55,9 +65,9 @@ export default function DashboardSidebar({ isDark = false, active = 'dashboard' 
             <path d="M9 11h6M9 15h6" />
           </svg>
         </div>
-        <div className={`left-[51px] top-[82px] absolute justify-start text-sm font-medium font-['Poppins'] ${isDark ? (active === 'order' ? activeTextDark : inactiveTextDark) : 'text-indigo-300'} transition-all duration-200 hover:translate-x-0.5`}>Order</div>
+        <div className={`top-[82px] absolute left-[32px] w-28 text-left text-sm font-medium font-['Poppins'] ${isDark ? (active === 'order' ? activeTextDark : inactiveTextDark) : (active === 'order' ? 'text-indigo-900' : 'text-indigo-300')} transition-colors duration-200`}>Order</div>
 
-        <div className={`w-4 h-5 left-[12px] top-[156px] absolute ${isDark ? (active === 'products' ? activeTextDark : inactiveTextDark) : 'text-indigo-300'} transition-colors duration-200 hover:translate-x-0.5`}>
+        <div className={`w-4 h-5 left-[8px] top-[156px] absolute ${isDark ? (active === 'products' ? activeTextDark : inactiveTextDark) : (active === 'products' ? 'text-indigo-900' : 'text-indigo-300')} transition-colors duration-200`}>
           {/* Products box icon */}
           <svg viewBox="0 0 24 24" className="w-full h-full" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
@@ -65,9 +75,9 @@ export default function DashboardSidebar({ isDark = false, active = 'dashboard' 
             <path d="M12 22V12" />
           </svg>
         </div>
-        <div className={`left-[51px] top-[155px] absolute justify-start text-sm font-medium font-['Poppins'] ${isDark ? (active === 'products' ? activeTextDark : inactiveTextDark) : 'text-indigo-300'} transition-all duration-200 hover:translate-x-0.5`}>Products</div>
+        <div className={`top-[155px] absolute left-[32px] w-28 text-left text-sm font-medium font-['Poppins'] ${isDark ? (active === 'products' ? activeTextDark : inactiveTextDark) : (active === 'products' ? 'text-indigo-900' : 'text-indigo-300')} transition-colors duration-200`}>Products</div>
 
-        <div className={`w-5 h-4 left-[10px] top-[303px] absolute ${isDark ? (active === 'payments' ? activeTextDark : inactiveTextDark) : 'text-indigo-300'} transition-colors duration-200 hover:translate-x-0.5`}>
+        <div className={`w-5 h-4 left-[8px] top-[303px] absolute ${isDark ? (active === 'payments' ? activeTextDark : inactiveTextDark) : (active === 'payments' ? 'text-indigo-900' : 'text-indigo-300')} transition-colors duration-200`}>
           {/* Payments card icon */}
           <svg viewBox="0 0 24 24" className="w-full h-full" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <rect x="2" y="5" width="20" height="14" rx="2" ry="2" />
@@ -75,18 +85,18 @@ export default function DashboardSidebar({ isDark = false, active = 'dashboard' 
             <path d="M6 15h4" />
           </svg>
         </div>
-        <div className={`left-[51px] top-[299px] absolute justify-start text-sm font-medium font-['Poppins'] ${isDark ? (active === 'payments' ? activeTextDark : inactiveTextDark) : 'text-indigo-300'} transition-all duration-200 hover:translate-x-0.5`}>Payments</div>
+        <div className={`top-[299px] absolute left-[32px] w-28 text-left text-sm font-medium font-['Poppins'] ${isDark ? (active === 'payments' ? activeTextDark : inactiveTextDark) : (active === 'payments' ? 'text-indigo-900' : 'text-indigo-300')} transition-colors duration-200`}>Payments</div>
 
-        <div className={`w-5 h-5 left-[11px] top-[373.40px] absolute ${isDark ? (active === 'settings' ? activeTextDark : inactiveTextDark) : 'text-indigo-300'} transition-colors duration-200 hover:translate-x-0.5`}>
+        <div className={`w-5 h-5 left-[8px] top-[373.40px] absolute ${isDark ? (active === 'settings' ? activeTextDark : inactiveTextDark) : (active === 'settings' ? 'text-indigo-900' : 'text-indigo-300')} transition-colors duration-200`}>
           {/* Settings cog icon */}
           <svg viewBox="0 0 24 24" className="w-full h-full" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <circle cx="12" cy="12" r="3" />
             <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 8 19.49a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 3.6 15a1.65 1.65 0 0 0-1.51-1H2a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 3.6 8a1.65 1.65 0 0 0-.33-1.82l-.06-.06A2 2 0 1 1 6.04 3.3l.06.06A1.65 1.65 0 0 0 7.92 3h.18A1.65 1.65 0 0 0 9 1.49V1a2 2 0 0 1 4 0v.09A1.65 1.65 0 0 0 14.1 3c.26 0 .52.03.77.1l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9c.36 0 .71.13 1 .36.29.23.52.54.63.89H21a2 2 0 0 1 0 4h-.09c-.11.35-.34.66-.63.89-.29.23-.64.36-1 .36z" />
           </svg>
         </div>
-        <div className={`left-[51px] top-[371px] absolute justify-start text-sm font-medium font-['Poppins'] ${isDark ? (active === 'settings' ? activeTextDark : inactiveTextDark) : 'text-indigo-300'} transition-all duration-200 hover:translate-x-0.5`}>Settings</div>
+        <div className={`top-[371px] absolute left-[32px] w-28 text-left text-sm font-medium font-['Poppins'] ${isDark ? (active === 'settings' ? activeTextDark : inactiveTextDark) : (active === 'settings' ? 'text-indigo-900' : 'text-indigo-300')} transition-colors duration-200`}>Settings</div>
 
-        <div className={`w-5 h-4 left-[9px] top-[231px] absolute ${isDark ? (active === 'shipping' ? activeTextDark : inactiveTextDark) : 'text-indigo-300'} transition-colors duration-200 hover:translate-x-0.5`}>
+        <div className={`w-5 h-4 left-[8px] top-[231px] absolute ${isDark ? (active === 'shipping' ? activeTextDark : inactiveTextDark) : (active === 'shipping' ? 'text-indigo-900' : 'text-indigo-300')} transition-colors duration-200`}>
           {/* Shipping truck icon */}
           <svg viewBox="0 0 24 24" className="w-full h-full" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M3 7h13v10H3z" />
@@ -95,17 +105,17 @@ export default function DashboardSidebar({ isDark = false, active = 'dashboard' 
             <circle cx="17.5" cy="18" r="1.5" />
           </svg>
         </div>
-        <div className={`left-[51px] top-[227px] absolute justify-start text-sm font-medium font-['Poppins'] ${isDark ? (active === 'shipping' ? activeTextDark : inactiveTextDark) : 'text-indigo-300'} transition-all duration-200 hover:translate-x-0.5`}>Shipping</div>
+        <div className={`top-[227px] absolute left-[32px] w-28 text-left text-sm font-medium font-['Poppins'] ${isDark ? (active === 'shipping' ? activeTextDark : inactiveTextDark) : (active === 'shipping' ? 'text-indigo-900' : 'text-indigo-300')} transition-colors duration-200`}>Shipping</div>
 
         {/* Blog */}
-        <div className={`w-5 h-5 left-[11px] top-[445px] absolute ${isDark ? (active === 'blog' ? activeTextDark : inactiveTextDark) : 'text-indigo-300'} transition-colors duration-200 hover:translate-x-0.5`}>
+        <div className={`w-5 h-5 left-[8px] top-[445px] absolute ${isDark ? (active === 'blog' ? activeTextDark : inactiveTextDark) : (active === 'blog' ? 'text-indigo-900' : 'text-indigo-300')} transition-colors duration-200`}>
           {/* Blog icon (book) */}
           <svg viewBox="0 0 24 24" className="w-full h-full" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
             <path d="M4 4v15.5A2.5 2.5 0 0 1 6.5 22H20V4a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2z" />
           </svg>
         </div>
-        <div className={`left-[51px] top-[443px] absolute justify-start text-sm font-medium font-['Poppins'] ${isDark ? (active === 'blog' ? activeTextDark : inactiveTextDark) : 'text-indigo-300'} transition-all duration-200 hover:translate-x-0.5`}>Blog</div>
+        <div className={`top-[443px] absolute left-[32px] w-28 text-left text-sm font-medium font-['Poppins'] ${isDark ? (active === 'blog' ? activeTextDark : inactiveTextDark) : (active === 'blog' ? 'text-indigo-900' : 'text-indigo-300')} transition-colors duration-200`}>Blog</div>
       </div>
     </aside>
   )

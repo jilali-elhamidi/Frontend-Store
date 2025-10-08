@@ -75,7 +75,7 @@ export default function AdminProductsPage() {
   }
 
   const ProductCard = ({ product }: { product: Product }) => (
-    <div className={`w-full md:w-80 h-full p-4 ${subtleCardBg} rounded-2xl inline-flex flex-col justify-start items-start gap-4 transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5`}>
+    <div className={`w-full h-full p-4 ${subtleCardBg} rounded-2xl inline-flex flex-col justify-start items-start gap-4 transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 min-w-0`}>
       <div className="self-stretch inline-flex justify-start items-start gap-4 min-h-20">
         <div className="w-20 h-20 rounded-lg overflow-hidden">
           <img
@@ -142,8 +142,9 @@ export default function AdminProductsPage() {
   )
 
   return (
+    <main className="home-zoom overflow-x-hidden">  
     <div className={isDark ? 'dark' : ''}>
-      <div className={`w-screen min-h-screen ${frameBg}`}>
+      <div className={`w-351 min-h-screen ${frameBg}`}>
         <div className="flex w-full min-h-full">
           {/* Sidebar */}
           <DashboardSidebar isDark={isDark} active="products" />
@@ -211,7 +212,7 @@ export default function AdminProductsPage() {
               <div className="flex flex-col gap-4">
                 <div className={`grid grid-cols-1 ${showFilters ? 'md:grid-cols-2 xl:grid-cols-3' : 'md:grid-cols-3 xl:grid-cols-3'} auto-rows-fr items-stretch gap-4`}>
                   {filtered.map((p) => (
-                    <Link key={p.id} to={`/admin/products/${p.id}`} className="block h-full">
+                    <Link key={p.id} to={`/admin/products/${p.id}`} className="block h-full min-w-0">
                       <ProductCard product={p} />
                     </Link>
                   ))}
@@ -294,5 +295,6 @@ export default function AdminProductsPage() {
         </div>
       </div>
     </div>
+    </main>
   )
 }
