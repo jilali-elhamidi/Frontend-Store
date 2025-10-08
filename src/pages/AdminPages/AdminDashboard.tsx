@@ -7,6 +7,7 @@ import TrendsCard from '../../components/Admin/Dashboard/TrendsCard'
 
 export default function AdminDashboardPage() {
   const [isDark, setIsDark] = useState<boolean>(false)
+  const [mobileOpen, setMobileOpen] = useState<boolean>(false)
 
   // Initialize theme from localStorage on mount
   useEffect(() => {
@@ -36,15 +37,52 @@ export default function AdminDashboardPage() {
   return (
     <main className="home-zoom ">
     <div className={isDark ? 'dark' : ''}>
-      <div className={`w-351 min-h-screen ${isDark ? 'bg-slate-800' : 'bg-slate-50'} dark:bg-slate-800`}>
+      <div className={`w-screen lg:w-351 min-h-screen ${isDark ? 'bg-slate-800' : 'bg-slate-50'} dark:bg-slate-800`}>
         <div className="flex w-full min-h-full">
           {/* Sidebar */}
-          <DashboardSidebar isDark={isDark} active="dashboard" />
+          <aside className="hidden lg:block">
+            <DashboardSidebar isDark={isDark} active="dashboard" />
+          </aside>
+
+          {/* Mobile sidebar (drawer) */}
+          {mobileOpen && (
+            <div className="fixed inset-0 z-50 lg:hidden">
+              <div className="absolute inset-0 bg-black/40" onClick={() => setMobileOpen(false)} aria-hidden="true" />
+              <div className={`absolute left-0 top-0 h-full w-80 max-w-[80%] ${isDark ? 'bg-slate-800' : 'bg-white'} shadow-xl`}> 
+                <div className="flex items-center justify-between px-3 py-3 border-b border-slate-200 dark:border-slate-700">
+                  <span className={`text-sm font-medium ${isDark ? 'text-slate-200' : 'text-slate-800'}`}>Menu</span>
+                  <button
+                    className="p-2 rounded-md hover:bg-black/5 dark:hover:bg-white/10"
+                    aria-label="Close menu"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={`h-5 w-5 ${isDark ? 'text-slate-200' : 'text-slate-700'}`}>
+                      <path d="M6 6l12 12M6 18L18 6" />
+                    </svg>
+                  </button>
+                </div>
+                <div className="h-[calc(100%-56px)] overflow-y-auto">
+                  <DashboardSidebar isDark={isDark} active="dashboard" />
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* Main content */}
           <main className="flex-1 p-3 lg:p-5 flex flex-col">
             {/* Top bar */}
             <div className="w-full mb-3 flex items-center gap-2">
+              {/* Mobile menu button */}
+              <button
+                type="button"
+                className="lg:hidden inline-flex items-center justify-center p-2 rounded-md hover:bg-black/5 dark:hover:bg-white/10"
+                aria-label="Open menu"
+                onClick={() => setMobileOpen(true)}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={`h-5 w-5 ${isDark ? 'text-slate-200' : 'text-slate-700'}`}>
+                  <path d="M3 6h18M3 12h18M3 18h18" />
+                </svg>
+              </button>
               <h1 className={`text-xl font-semibold ${isDark ? 'text-slate-100' : 'text-slate-900'} dark:text-slate-100`}>Total Revenue</h1>
               <div className="ml-auto w-full max-w-sm">
                 <input

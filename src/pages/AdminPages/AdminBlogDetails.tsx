@@ -25,12 +25,15 @@ const AdminBlogDetailsPage: React.FC = () => {
   const textMuted = isDark ? 'text-slate-400' : 'text-gray-500'
 
   return (
+    <main className="overflow-x-hidden">  
     <div className={isDark ? 'dark' : ''}>
-      <div className={`w-screen min-h-screen ${frameBg}`}>
+      <div className={`w-421 min-h-screen ${frameBg}`}>
         <div className="flex w-full min-h-full">
           {/* Sidebar */}
-          <DashboardSidebar isDark={isDark} active="blog" />
-
+          <aside className="home-zoom">
+            <DashboardSidebar isDark={isDark} active="blog" />
+          </aside>
+          <main className="blog-detail-zoom ">  
           {/* Main content */}
           <div className="flex-1 min-h-screen">
             <div className="max-w-[1460px] mx-auto px-6 py-8">
@@ -272,9 +275,12 @@ const AdminBlogDetailsPage: React.FC = () => {
               </div>
             </div>
           </div>
-        </div>
-      </div>
+          </main>
+        </div> 
+      </div>  
     </div>
+    </main>
+    
   )
 }
 

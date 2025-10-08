@@ -45,13 +45,16 @@ const AdminBlogCreatePage: React.FC = () => {
   const cardBg = isDark ? 'bg-amber-50/5' : 'bg-amber-50'
 
   return (
+    
     <div className={isDark ? 'dark' : ''}>
       <div className={`w-screen min-h-screen ${frameBg}`}>
         <div className="flex w-full min-h-full">
           {/* Sidebar */}
-          <DashboardSidebar isDark={isDark} active="blog" />
-
+           <aside className="home-zoom">
+                      <DashboardSidebar isDark={isDark} active="blog" />
+                    </aside>
           {/* Main content */}
+          <main className="blog-create-zoom ">
           <div className="flex-1 min-h-screen">
             <div className="max-w-[1460px] mx-auto px-6 py-8">
               {/* Canvas following the provided absolute layout */}
@@ -242,7 +245,9 @@ const AdminBlogCreatePage: React.FC = () => {
               </div>
             </div>
           </div>
+          </main>
         </div>
+        
       </div>
     </div>
   )

@@ -128,16 +128,15 @@ export default function TrendsCard({ isDark = false }: TrendsCardProps) {
           </LineChart>
         </ResponsiveContainer>
 
-        {/* Value callout near highlight point */}
+        {/* Value callouts near highlight points */}
         <div
-          className="absolute -translate-x-1/2 -translate-y-full bg-white text-gray-800 text-sm font-semibold rounded-md px-2 py-1 shadow dark:bg-slate-900 dark:text-slate-100 dark:border dark:border-slate-700"
+          className="absolute -translate-x-1/2 -translate-y-full bg-white text-gray-800 text-xs sm:text-sm font-semibold rounded-md px-2 py-1 shadow dark:bg-slate-900 dark:text-slate-100 dark:border dark:border-slate-700"
           style={{ left: `${(highlightIndex / (data.length - 1)) * 100}%`, top: '40%' }}
         >
           {highlightValue}
         </div>
-        {/* Yesterday value callout */}
         <div
-          className="absolute -translate-x-1/2 -translate-y-full bg-white text-gray-600 text-sm font-semibold rounded-md px-2 py-1 shadow dark:bg-slate-900 dark:text-slate-300 dark:border dark:border-slate-700"
+          className="absolute -translate-x-1/2 -translate-y-full bg-white text-gray-600 text-xs sm:text-sm font-semibold rounded-md px-2 py-1 shadow dark:bg-slate-900 dark:text-slate-300 dark:border dark:border-slate-700"
           style={{ left: `${(yHighlightIndex / (data.length - 1)) * 100}%`, top: '70%' }}
         >
           {yesterdayHighlightValue}

@@ -35,14 +35,18 @@ export default function AdminProductCreatePage() {
   }
 
   return (
+    <main className="overflow-x-hidden"> 
     <div className={isDark ? 'dark' : ''}>
-      <div className={`w-screen min-h-screen ${frameBg}`}>
+      <div className={`w-321 min-h-screen ${frameBg}`}>
         <div className="flex w-full min-h-full">
           {/* Sidebar */}
-          <DashboardSidebar isDark={isDark} active="products" />
+          <aside className="home-zoom">
+                      <DashboardSidebar isDark={isDark} active="blog" />
+                    </aside>
+
 
           {/* Main content */}
-          <main className="flex-1 p-6 flex flex-col gap-5">
+          <main className="flex-1 p-6 flex flex-col gap-5 blog-deatail-zoom">
             {/* Header */}
             <div className="inline-flex flex-col justify-start items-start gap-4 w-full">
               <div className="inline-flex justify-between items-center w-full gap-6">
@@ -192,5 +196,6 @@ export default function AdminProductCreatePage() {
         </div>
       </div>
     </div>
+    </main>
   )
 }

@@ -34,8 +34,9 @@ export default function AdminProductDetailsPage() {
   }
 
   return (
+    <main className="home-zoom overflow-x-hidden"> 
     <div className={isDark ? 'dark' : ''}>
-      <div className={`w-screen min-h-screen ${frameBg}`}>
+      <div className={`w-351 min-h-screen ${frameBg}`}>
         <div className="flex w-full min-h-full">
           {/* Sidebar */}
           <DashboardSidebar isDark={isDark} active="products" />
@@ -192,5 +193,6 @@ export default function AdminProductDetailsPage() {
         </div>
       </div>
     </div>
+    </main>
   )
 }

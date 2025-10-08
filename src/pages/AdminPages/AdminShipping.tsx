@@ -1,132 +1,277 @@
-import React from "react";
-import {
-  Box,
-  Grid,
-  Card,
-  CardContent,
-  Typography,
-  LinearProgress,
-} from "@mui/material";
+import React from 'react'
+import DashboardSidebar from '../../components/Admin/DashboardSidebar'
 
-const Dashboard = () => {
-  // Données des cartes principales
-  const stats = [
-    { title: "On route vehicles", value: 38, color: "#1976d2" },
-    { title: "Vehicles with errors", value: 2, color: "#d32f2f" },
-    { title: "Vehicles deviated from route", value: 1, color: "#ed6c02" },
-    { title: "Late deliveries", value: 4, color: "#9c27b0" },
-  ];
-
-  // Données pour "Overview"
-  const overview = [
-    { label: "Delivered", percent: 80, color: "#4caf50" },
-    { label: "Pending", percent: 15, color: "#ff9800" },
-    { label: "Cancelled", percent: 5, color: "#f44336" },
-  ];
-
-  // Données pour "Condition"
-  const condition = [
-    { label: "Good", percent: 70, color: "#66bb6a" },
-    { label: "Average", percent: 20, color: "#ffa726" },
-    { label: "Critical", percent: 10, color: "#ef5350" },
-  ];
-
+export default function AdminShippingPage() {
   return (
-    <Box
-      sx={{
-        p: 3,
-        backgroundColor: "#f8f9fa",
-        minHeight: "100vh",
-        overflowY: "auto",
-      }}
-    >
-      <Typography variant="h4" fontWeight="bold" mb={3}>
-        Logistics Dashboard
-      </Typography>
+    <main className="home-zoom ">  
+    <div className="w-351 min-h-screen bg-teal-50 overflow-y-hidden">
+      {/* Sidebar pinned exactly inside the green zone */}
+      <aside className="absolute left-0 top-0 h-full w-[280px]">
+        <DashboardSidebar active="shipping" />
+      </aside>
 
-      {/* Ligne de statistiques principales */}
-      <Grid container spacing={2}>
-        {stats.map((item, index) => (
-          <Grid item xs={12} sm={6} md={3} key={index}>
-            <Card
-              sx={{
-                borderRadius: 4,
-                textAlign: "center",
-                p: 2,
-                boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
-              }}
-            >
-              <Typography variant="h3" color={item.color} fontWeight="bold">
-                {item.value}
-              </Typography>
-              <Typography color="text.secondary" fontSize="1rem">
-                {item.title}
-              </Typography>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
-
-      {/* Ligne Overview + Condition */}
-      <Grid container spacing={2} mt={3}>
-        {/* Overview */}
-        <Grid item xs={12} md={6}>
-          <Card sx={{ borderRadius: 4, p: 2 }}>
-            <Typography variant="h6" fontWeight="bold" mb={2}>
-              Vehicles Overview
-            </Typography>
-            {overview.map((item, i) => (
-              <Box key={i} mb={2}>
-                <Typography fontSize="0.9rem" mb={0.5}>
-                  {item.label}
-                </Typography>
-                <LinearProgress
-                  variant="determinate"
-                  value={item.percent}
-                  sx={{
-                    height: 10,
-                    borderRadius: 5,
-                    backgroundColor: "#e0e0e0",
-                    "& .MuiLinearProgress-bar": {
-                      backgroundColor: item.color,
-                    },
-                  }}
-                />
-              </Box>
-            ))}
-          </Card>
-        </Grid>
-
-        {/* Condition */}
-        <Grid item xs={12} md={6}>
-          <Card sx={{ borderRadius: 4, p: 2 }}>
-            <Typography variant="h6" fontWeight="bold" mb={2}>
-              Vehicles Condition
-            </Typography>
-            {condition.map((item, i) => (
-              <Box key={i} mb={2}>
-                <Typography fontSize="0.9rem" mb={0.5}>
-                  {item.label}
-                </Typography>
-                <LinearProgress
-                  variant="determinate"
-                  value={item.percent}
-                  sx={{
-                    height: 10,
-                    borderRadius: 5,
-                    backgroundColor: "#e0e0e0",
-                    "& .MuiLinearProgress-bar": {
-                      backgroundColor: item.color,
-                    },
-                  }}
-                />
-              </Box>
-            ))}
-          </Card>
-        </Grid>
-      </Grid>
-    </Box>
-  );
-};
-
-export default Dashboard;
+      {/* Content area to the right of the sidebar */}
+      <main className="relative ml-[280px]">
+        <div className="w-full h-[1200px] relative bg-teal-50 -translate-x-[60px]">
+          <div className="w-full h-20 left-[8px] top-[48px] absolute">
+            <div className="w-36 h-10 left-[15.99px] top-[15.99px] absolute justify-center text-gray-900 text-4xl font-bold font-['Plus_Jakarta_Sans'] leading-10">Logistics</div>
+            <div className="w-36 h-10 right-4 top-[15.99px] absolute bg-indigo-500 rounded-xl shadow-[0px_1px_5px_0px_rgba(0,0,0,0.08)]">
+              <div className="w-5 h-5 left-[16.01px] top-[10.22px] absolute overflow-hidden">
+                <div className="w-5 h-5 left-0 top-0 absolute overflow-hidden">
+                  <div className="w-3 h-3 left-[4.17px] top-[4.17px] absolute outline outline-[1.67px] outline-offset-[-0.83px] outline-white" />
+                </div>
+              </div>
+              <div className="w-20 h-4 left-[43.99px] top-[11.32px] absolute text-center justify-center text-white text-sm font-semibold font-['Inter'] leading-normal">Add Vehicle</div>
+            </div>
+          </div>
+          <div className="w-64 h-36 left-[8px] top-[120.43px] absolute">
+            <div className="w-64 h-28 left-[15.99px] top-[15.99px] absolute bg-white rounded-[20px] shadow-[0px_0px_0px_0.5px_rgba(0,0,0,0.03)] shadow-[0px_5px_22px_0px_rgba(0,0,0,0.04)] overflow-hidden">
+              <div className="w-7 h-7 left-[79.99px] top-[28.89px] absolute justify-center text-gray-900 text-2xl font-bold font-['Plus_Jakarta_Sans'] leading-7">38</div>
+              <div className="w-10 h-10 left-[24px] top-[23.99px] absolute rounded-[20px] overflow-hidden">
+                <div className="w-4 h-4 left-[11px] top-[11.01px] absolute bg-red-500 rounded-lg" />
+              </div>
+              <div className="w-28 h-4 left-[24px] top-[74.20px] absolute justify-center text-gray-500 text-sm font-normal font-['Inter'] leading-snug">On route vehicles</div>
+            </div>
+          </div>
+          <div className="w-64 h-36 left-[290px] top-[120.43px] absolute">
+            <div className="w-64 h-28 left-[15.99px] top-[15.99px] absolute bg-white rounded-[20px] shadow-[0px_0px_0px_0.5px_rgba(0,0,0,0.03)] shadow-[0px_5px_22px_0px_rgba(0,0,0,0.04)] overflow-hidden">
+              <div className="w-3.5 h-7 left-[79.99px] top-[28.89px] absolute justify-center text-gray-900 text-2xl font-bold font-['Plus_Jakarta_Sans'] leading-7">2</div>
+              <div className="w-10 h-10 left-[24px] top-[23.99px] absolute bg-red-500/10 rounded-lg overflow-hidden">
+                <div className="w-6 h-6 left-[8px] top-[8px] absolute overflow-hidden">
+                  <div className="w-6 h-6 left-0 top-0 absolute overflow-hidden">
+                    <div className="w-5 h-4 left-[1.73px] top-[2.49px] absolute bg-white/0" />
+                    <div className="w-5 h-4 left-[1.73px] top-[2.49px] absolute outline outline-2 outline-offset-[-1px] outline-red-500" />
+                  </div>
+                </div>
+              </div>
+              <div className="w-32 h-4 left-[24px] top-[74.20px] absolute justify-center text-gray-500 text-sm font-normal font-['Inter'] leading-snug">Vehicles with errors</div>
+            </div>
+          </div>
+          <div className="w-64 h-36 left-[572px] top-[120.43px] absolute">
+            <div className="w-64 h-28 left-[15.99px] top-[15.99px] absolute bg-white rounded-[20px] shadow-[0px_0px_0px_0.5px_rgba(0,0,0,0.03)] shadow-[0px_5px_22px_0px_rgba(0,0,0,0.04)] overflow-hidden">
+              <div className="w-2.5 h-7 left-[79.98px] top-[28.89px] absolute justify-center text-gray-900 text-2xl font-bold font-['Plus_Jakarta_Sans'] leading-7">1</div>
+              <div className="w-10 h-10 left-[24px] top-[23.99px] absolute bg-amber-500/10 rounded-lg overflow-hidden">
+                <div className="w-6 h-6 left-[8px] top-[8px] absolute overflow-hidden">
+                  <div className="w-6 h-6 left-0 top-0 absolute overflow-hidden">
+                    <div className="w-4 h-4 left-[3px] top-[2px] absolute bg-white/0" />
+                    <div className="w-4 h-4 left-[3px] top-[2px] absolute outline outline-2 outline-offset-[-1px] outline-amber-500" />
+                  </div>
+                </div>
+              </div>
+              <div className="w-48 h-4 left-[24px] top-[74.20px] absolute justify-center text-gray-500 text-sm font-normal font-['Inter'] leading-snug">Vehicles deviated from route</div>
+            </div>
+          </div>
+          <div className="w-64 h-36 left-[854px] top-[120.43px] absolute">
+            <div className="w-64 h-28 left-[15.99px] top-[15.99px] absolute bg-white rounded-[20px] shadow-[0px_0px_0px_0.5px_rgba(0,0,0,0.03)] shadow-[0px_5px_22px_0px_rgba(0,0,0,0.04)] overflow-hidden">
+              <div className="w-3.5 h-7 left-[79.98px] top-[28.89px] absolute justify-center text-gray-900 text-2xl font-bold font-['Plus_Jakarta_Sans'] leading-7">2</div>
+              <div className="w-10 h-10 left-[23.99px] top-[23.99px] absolute bg-indigo-500/10 rounded-lg overflow-hidden">
+                <div className="w-6 h-6 left-[8.01px] top-[8px] absolute overflow-hidden">
+                  <div className="w-6 h-6 left-0 top-0 absolute overflow-hidden">
+                    <div className="w-4 h-4 left-[3px] top-[2px] absolute bg-white/0" />
+                    <div className="w-1 h-2 left-[12px] top-[5.60px] absolute bg-white/0" />
+                    <div className="w-4 h-4 left-[3px] top-[2px] absolute outline outline-2 outline-offset-[-1px] outline-indigo-500" />
+                  </div>
+                </div>
+              </div>
+              <div className="w-20 h-4 left-[23.99px] top-[74.20px] absolute justify-center text-gray-500 text-sm font-normal font-['Inter'] leading-snug">Late vehicles</div>
+            </div>
+          </div>
+          <div className="w-[560px] h-96 left-[8px] top-[270.34px] absolute">
+            <div className="w-[540px] h-96 left-[15.99px] top-[15.99px] absolute bg-white rounded-[20px] shadow-[0px_0px_0px_0.5px_rgba(0,0,0,0.03)] shadow-[0px_5px_22px_0px_rgba(0,0,0,0.04)] overflow-hidden">
+              <div className="w-36 h-5 left-[24px] top-[32px] absolute justify-center text-gray-900 text-base font-bold font-['Plus_Jakarta_Sans'] leading-tight">Vehicles Overview</div>
+              <div className="w-72 h-72 left-[24px] top-[91.98px] absolute overflow-hidden">
+                <div className="w-52 h-52 left-[40.99px] top-[30.98px] absolute outline outline-[10.75px] outline-offset-[-5.37px] outline-gray-100/90" />
+                <div className="w-44 h-44 left-[57.07px] top-[47.06px] absolute outline outline-[10.75px] outline-offset-[-5.37px] outline-gray-100/90" />
+                <div className="w-36 h-36 left-[73.15px] top-[63.14px] absolute outline outline-[10.75px] outline-offset-[-5.37px] outline-gray-100/90" />
+                <div className="w-28 h-48 left-[148px] top-[30.98px] absolute outline outline-[11.08px] outline-offset-[-5.54px] outline-indigo-500/90" />
+                <div className="w-24 h-44 left-[148px] top-[47.06px] absolute outline outline-[11.08px] outline-offset-[-5.54px] outline-amber-500/90" />
+                <div className="w-12 h-5 left-[148px] top-[63.14px] absolute outline outline-[11.08px] outline-offset-[-5.54px] outline-cyan-500/90" />
+                <div className="w-32 h-32 left-[83.52px] top-[73.52px] absolute" />
+                <div className="left-[148px] top-[122px] absolute text-center justify-start"></div>
+                <div className="left-[148px] top-[156px] absolute text-center justify-start"></div>
+                <div className="w-72 h-0 left-[10.01px] top-0 absolute opacity-0 bg-black outline outline-1 outline-offset-[-0.50px] outline-zinc-400" />
+                <div className="w-72 h-0 left-[10.01px] top-0 absolute opacity-0 bg-black" />
+              </div>
+              <div className="w-8 h-4 left-[342px] top-[139.67px] absolute justify-center text-gray-500 text-sm font-normal font-['Inter'] leading-snug">Total</div>
+              <div className="w-11 h-7 left-[342px] top-[158.30px] absolute justify-center text-gray-900 text-2xl font-bold font-['Plus_Jakarta_Sans'] leading-7">100</div>
+              <div className="w-4 h-4 left-[342px] top-[222.36px] absolute bg-indigo-500 rounded" />
+              <div className="w-14 h-4 left-[365.98px] top-[221.60px] absolute justify-center text-gray-500 text-sm font-normal font-['Inter'] leading-snug">Available</div>
+              <div className="w-48 h-px left-[424.66px] top-[230.35px] absolute" />
+              <div className="w-5 h-4 left-[618.15px] top-[221.60px] absolute justify-center text-gray-900 text-sm font-medium font-['Inter'] leading-snug">38</div>
+              <div className="w-4 h-4 left-[342px] top-[260.30px] absolute bg-amber-500 rounded" />
+              <div className="w-24 h-4 left-[365.98px] top-[259.53px] absolute justify-center text-gray-500 text-sm font-normal font-['Inter'] leading-snug">Out of service</div>
+              <div className="w-40 h-px left-[459.15px] top-[268.28px] absolute" />
+              <div className="w-5 h-4 left-[618.28px] top-[259.53px] absolute justify-center text-gray-900 text-sm font-medium font-['Inter'] leading-snug">50</div>
+              <div className="w-4 h-4 left-[342px] top-[298.23px] absolute bg-cyan-500 rounded" />
+              <div className="w-14 h-4 left-[365.98px] top-[297.47px] absolute justify-center text-gray-500 text-sm font-normal font-['Inter'] leading-snug">On route</div>
+              <div className="w-48 h-px left-[423.39px] top-[306.22px] absolute" />
+              <div className="w-4 h-4 left-[620.80px] top-[297.47px] absolute justify-center text-gray-900 text-sm font-medium font-['Inter'] leading-snug">12</div>
+            </div>
+          </div>
+          <div className="w-[520px] h-auto left-[600px] top-[270.34px] absolute">
+            <div className="w-[500px] h-auto left-[15.99px] top-[15.99px] absolute bg-white rounded-[20px] shadow-[0px_0px_0px_0.5px_rgba(0,0,0,0.03)] shadow-[0px_5px_22px_0px_rgba(0,0,0,0.04)] overflow-hidden">
+              <div className="px-6 pt-6 text-gray-900 text-base font-bold font-['Plus_Jakarta_Sans'] leading-tight">Vehicles Condition</div>
+              <div className="mt-4 px-6 pb-6 flex flex-col gap-4">
+                <div className="flex items-center gap-4 rounded-2xl p-4 bg-indigo-500/5">
+                  <div className="min-w-28 text-indigo-600 font-semibold">Very good</div>
+                  <div className="flex-1 h-2 rounded bg-gray-200 overflow-hidden">
+                    <div className="h-2 bg-indigo-500" style={{ width: '83%' }} />
+                  </div>
+                  <div className="w-14 text-right text-gray-900 font-bold">181</div>
+                </div>
+                <div className="flex items-center gap-4 rounded-2xl p-4 bg-amber-500/5">
+                  <div className="min-w-28 text-amber-600 font-semibold">Good</div>
+                  <div className="flex-1 h-2 rounded bg-gray-200 overflow-hidden">
+                    <div className="h-2 bg-amber-500" style={{ width: '11%' }} />
+                  </div>
+                  <div className="w-14 text-right text-gray-900 font-bold">24</div>
+                </div>
+                <div className="flex items-center gap-4 rounded-2xl p-4 bg-red-500/5">
+                  <div className="min-w-28 text-red-600 font-semibold">Bad</div>
+                  <div className="flex-1 h-2 rounded bg-gray-200 overflow-hidden">
+                    <div className="h-2 bg-red-500" style={{ width: '6%' }} />
+                  </div>
+                  <div className="w-14 text-right text-gray-900 font-bold">12</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="w-[1160px] h-[560px] left-[8px] top-[696.99px] absolute">
+            <div className="w-full h-[520px] left-[15.99px] top-[15.99px] absolute bg-white rounded-[20px] shadow-[0px_0px_0px_0.5px_rgba(0,0,0,0.03)] shadow-[0px_5px_22px_0px_rgba(0,0,0,0.04)] overflow-hidden">
+              <div className="w-36 h-5 left-[24px] top-[32px] absolute justify-center text-gray-900 text-base font-bold font-['Plus_Jakarta_Sans'] leading-tight">On Route Vehicles</div>
+              <div className="w-44 h-4 left-[24px] top-[54.22px] absolute justify-center text-gray-500 text-sm font-normal font-['Inter'] leading-snug">Condition and temperature</div>
+              <div className="w-full h-[460px] left-0 top-[89.95px] absolute overflow-hidden">
+                <div className="w-60 h-10 left-0 top-0 absolute bg-gray-50">
+                  <div className="w-16 h-3.5 left-[15.99px] top-[12.77px] absolute justify-center text-gray-700 text-xs font-semibold font-['Inter'] uppercase leading-3 tracking-wide">Location</div>
+                </div>
+                <div className="w-60 h-10 left-[224.79px] top-0 absolute bg-gray-50">
+                  <div className="w-24 h-3.5 left-[15.99px] top-[12.77px] absolute justify-center text-gray-700 text-xs font-semibold font-['Inter'] uppercase leading-3 tracking-wide">Ending Route</div>
+                </div>
+                <div className="w-60 h-10 left-[462.24px] top-0 absolute bg-gray-50">
+                  <div className="w-28 h-3.5 left-[15.99px] top-[12.77px] absolute justify-center text-gray-700 text-xs font-semibold font-['Inter'] uppercase leading-3 tracking-wide">Starting Route</div>
+                </div>
+                <div className="w-80 h-10 left-[699.69px] top-0 absolute bg-gray-50">
+                  <div className="w-16 h-3.5 left-[15.99px] top-[12.77px] absolute justify-center text-gray-700 text-xs font-semibold font-['Inter'] uppercase leading-3 tracking-wide">Warnings</div>
+                </div>
+                <div className="w-64 h-10 left-[920px] top-0 absolute bg-gray-50">
+                  <div className="w-48 h-3.5 left-[15.99px] top-[12.77px] absolute justify-center text-gray-700 text-xs font-semibold font-['Inter'] uppercase leading-3 tracking-wide">Refrigerator Temperature</div>
+                </div>
+                <div className="w-60 h-20 left-0 top-[41.99px] absolute border-b-1 border-gray-100">
+                  <div className="w-20 h-4 left-[71.98px] top-[27.21px] absolute justify-center text-gray-900 text-sm font-medium font-['Inter'] leading-snug">VOL-653CD1</div>
+                  <div className="w-10 h-10 left-[15.99px] top-[15.98px] absolute bg-gray-200 rounded-[20px] overflow-hidden">
+                    <div className="w-6 h-6 left-[8.01px] top-[8px] absolute overflow-hidden">
+                      <div className="w-6 h-6 left-0 top-0 absolute overflow-hidden">
+                        <div className="w-4 h-4 left-[3px] top-[3px] absolute bg-white/0" />
+                        <div className="w-4 h-4 left-[3px] top-[3px] absolute outline outline-2 outline-offset-[-1px] outline-black" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="w-60 h-20 left-[224.79px] top-[41.99px] absolute border-b-1 border-gray-100">
+                  <div className="w-36 h-4 left-[15.99px] top-[27.21px] absolute justify-center text-gray-900 text-sm font-normal font-['Inter'] leading-snug">Cleveland, Ohio, USA</div>
+                </div>
+                <div className="w-60 h-20 left-[462.24px] top-[41.99px] absolute border-b-1 border-gray-100">
+                  <div className="w-36 h-4 left-[15.99px] top-[27.21px] absolute justify-center text-gray-900 text-sm font-normal font-['Inter'] leading-snug">Cleveland, Ohio, USA</div>
+                </div>
+                <div className="w-80 h-20 left-[699.69px] top-[41.99px] absolute border-b-1 border-gray-100">
+                  <div className="w-28 h-6 left-[15.99px] top-[23.98px] absolute bg-emerald-500/10 rounded-xl">
+                    <div className="w-24 h-3.5 left-[7.99px] top-[4.44px] absolute justify-center text-emerald-700 text-xs font-semibold font-['Inter'] uppercase leading-normal tracking-wide">No warnings</div>
+                  </div>
+                </div>
+                <div className="w-64 h-20 left-[920px] top-[41.99px] absolute border-b-1 border-gray-100">
+                  <div className="w-16 h-4 left-[15.99px] top-[37.21px] absolute justify-center text-gray-900 text-sm font-normal font-['Inter'] leading-snug">Very Good</div>
+                  <div className="w-44 h-px left-[85.89px] top-[45.96px] absolute" />
+                  <div className="w-6 h-4 left-[200px] top-[37.21px] absolute justify-center text-gray-500 text-sm font-normal font-['Inter'] leading-snug">8°C</div>
+                  <div className="w-56 h-1 left-[15.99px] top-[15px] absolute bg-indigo-200 rounded-[3px] overflow-hidden">
+                    <div className="w-56 h-1 left-[-200px] top-0 absolute bg-indigo-500" />
+                  </div>
+                </div>
+                <div className="w-60 h-20 left-0 top-[114.49px] absolute border-b-1 border-gray-100">
+                  <div className="w-24 h-4 left-[71.98px] top-[27.76px] absolute justify-center text-gray-900 text-sm font-medium font-['Inter'] leading-snug">VOL-653CD2</div>
+                  <div className="w-10 h-10 left-[15.99px] top-[16.53px] absolute bg-gray-200 rounded-[20px] overflow-hidden">
+                    <div className="w-6 h-6 left-[8.01px] top-[8px] absolute overflow-hidden">
+                      <div className="w-6 h-6 left-0 top-0 absolute overflow-hidden">
+                        <div className="w-4 h-4 left-[3px] top-[3px] absolute bg-white/0" />
+                        <div className="w-4 h-4 left-[3px] top-[3px] absolute outline outline-2 outline-offset-[-1px] outline-black" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="w-60 h-20 left-[224.79px] top-[114.49px] absolute border-b-1 border-gray-100">
+                  <div className="w-36 h-4 left-[15.99px] top-[27.76px] absolute justify-center text-gray-900 text-sm font-normal font-['Inter'] leading-snug">Cleveland, Ohio, USA</div>
+                </div>
+                <div className="w-60 h-20 left-[462.24px] top-[114.49px] absolute border-b-1 border-gray-100">
+                  <div className="w-36 h-4 left-[15.99px] top-[27.76px] absolute justify-center text-gray-900 text-sm font-normal font-['Inter'] leading-snug">Cleveland, Ohio, USA</div>
+                </div>
+                <div className="w-80 h-20 left-[699.69px] top-[114.49px] absolute border-b-1 border-gray-100">
+                  <div className="w-52 h-6 left-[15.99px] top-[24.53px] absolute bg-amber-500/10 rounded-xl">
+                    <div className="w-48 h-3.5 left-[7.99px] top-[4.45px] absolute justify-center text-amber-700 text-xs font-semibold font-['Inter'] uppercase leading-normal tracking-wide">Temperature not optimal</div>
+                  </div>
+                </div>
+                <div className="w-64 h-20 left-[920px] top-[114.49px] absolute border-b-1 border-gray-100">
+                  <div className="w-16 h-4 left-[15.99px] top-[37.76px] absolute justify-center text-gray-900 text-sm font-normal font-['Inter'] leading-snug">Very Good</div>
+                  <div className="w-44 h-px left-[85.89px] top-[46.51px] absolute" />
+                  <div className="w-6 h-4 left-[200px] top-[37.76px] absolute justify-center text-gray-500 text-sm font-normal font-['Inter'] leading-snug">8°C</div>
+                  <div className="w-56 h-1 left-[15.99px] top-[15.56px] absolute bg-indigo-200 rounded-[3px] overflow-hidden">
+                    <div className="w-56 h-1 left-[-200px] top-0 absolute bg-indigo-500" />
+                  </div>
+                </div>
+                <div className="w-60 h-20 left-0 top-[187.55px] absolute border-b-1 border-gray-100">
+                  <div className="w-24 h-4 left-[71.98px] top-[27.76px] absolute justify-center text-gray-900 text-sm font-medium font-['Inter'] leading-snug">VOL-653CD3</div>
+                  <div className="w-10 h-10 left-[15.99px] top-[16.53px] absolute bg-gray-200 rounded-[20px] overflow-hidden">
+                    <div className="w-6 h-6 left-[8.01px] top-[8px] absolute overflow-hidden">
+                      <div className="w-6 h-6 left-0 top-0 absolute overflow-hidden">
+                        <div className="w-4 h-4 left-[3px] top-[3px] absolute bg-white/0" />
+                        <div className="w-4 h-4 left-[3px] top-[3px] absolute outline outline-2 outline-offset-[-1px] outline-black" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="w-60 h-20 left-[224.79px] top-[187.55px] absolute border-b-1 border-gray-100">
+                  <div className="w-36 h-4 left-[15.99px] top-[27.76px] absolute justify-center text-gray-900 text-sm font-normal font-['Inter'] leading-snug">Cleveland, Ohio, USA</div>
+                </div>
+                <div className="w-60 h-20 left-[462.24px] top-[187.55px] absolute border-b-1 border-gray-100">
+                  <div className="w-36 h-4 left-[15.99px] top-[27.76px] absolute justify-center text-gray-900 text-sm font-normal font-['Inter'] leading-snug">Cleveland, Ohio, USA</div>
+                </div>
+                <div className="w-80 h-20 left-[699.69px] top-[187.55px] absolute border-b-1 border-gray-100">
+                  <div className="w-40 h-6 left-[15.99px] top-[24.53px] absolute bg-red-500/10 rounded-xl">
+                    <div className="w-36 h-3.5 left-[7.99px] top-[4.44px] absolute justify-center text-red-700 text-xs font-semibold font-['Inter'] uppercase leading-normal tracking-wide">ECU not responding</div>
+                  </div>
+                </div>
+                <div className="w-64 h-20 left-[920px] top-[187.55px] absolute border-b-1 border-gray-100">
+                  <div className="w-16 h-4 left-[15.99px] top-[37.76px] absolute justify-center text-gray-900 text-sm font-normal font-['Inter'] leading-snug">Very Good</div>
+                  <div className="w-44 h-px left-[85.89px] top-[46.51px] absolute" />
+                  <div className="w-6 h-4 left-[200px] top-[37.76px] absolute justify-center text-gray-500 text-sm font-normal font-['Inter'] leading-snug">8°C</div>
+                  <div className="w-56 h-1 left-[15.99px] top-[15.55px] absolute bg-indigo-200 rounded-[3px] overflow-hidden">
+                    <div className="w-56 h-1 left-[-200px] top-0 absolute bg-indigo-500" />
+                  </div>
+                </div>
+                <div className="w-24 h-4 left-[71.98px] top-[288.37px] absolute justify-center text-gray-900 text-sm font-medium font-['Inter'] leading-snug">VOL-653CD4</div>
+                <div className="w-10 h-10 left-[15.99px] top-[277.13px] absolute bg-gray-200 rounded-[20px] overflow-hidden">
+                  <div className="w-6 h-6 left-[8.01px] top-[8.01px] absolute overflow-hidden">
+                    <div className="w-6 h-6 left-0 top-0 absolute overflow-hidden">
+                      <div className="w-4 h-4 left-[3px] top-[3px] absolute bg-white/0" />
+                      <div className="w-4 h-4 left-[3px] top-[3px] absolute outline outline-2 outline-offset-[-1px] outline-black" />
+                    </div>
+                  </div>
+                </div>
+                <div className="w-36 h-4 left-[240.78px] top-[288.37px] absolute justify-center text-gray-900 text-sm font-normal font-['Inter'] leading-snug">Cleveland, Ohio, USA</div>
+                <div className="w-36 h-4 left-[478.23px] top-[288.37px] absolute justify-center text-gray-900 text-sm font-normal font-['Inter'] leading-snug">Cleveland, Ohio, USA</div>
+                <div className="w-28 h-6 left-[715.68px] top-[285.14px] absolute bg-emerald-500/10 rounded-xl">
+                  <div className="w-24 h-3.5 left-[7.99px] top-[4.44px] absolute justify-center text-emerald-700 text-xs font-semibold font-['Inter'] uppercase leading-normal tracking-wide">No warnings</div>
+                </div>
+                <div className="w-16 h-4 left-[936px] top-[298.37px] absolute justify-center text-gray-900 text-sm font-normal font-['Inter'] leading-snug">Very Good</div>
+                <div className="w-44 h-px left-[1006px] top-[307.12px] absolute" />
+                <div className="w-6 h-4 left-[1120px] top-[298.37px] absolute justify-center text-gray-500 text-sm font-normal font-['Inter'] leading-snug">8°C</div>
+                <div className="w-56 h-1 left-[936px] top-[276.16px] absolute bg-indigo-200 rounded-[3px] overflow-hidden">
+                  <div className="w-56 h-1 left-[-200px] top-0 absolute bg-indigo-500" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+    </main>
+  )
+}

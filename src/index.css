@@ -107,9 +107,20 @@ button:focus-visible {
   }
 }
 
-/* HomePage-only zoom on desktop */
+/* Sidebar/home zoom on desktop (apply to any element with .home-zoom) */
 @media (min-width: 1280px) {
-  main.home-zoom {
+  .home-zoom {
     zoom: 0.9;
+  }
+}
+@media (min-width: 1280px) {
+  main.blog-detail-zoom {
+    zoom: 0.74;
+  }
+}
+
+@media (min-width: 1280px) {
+  main.blog-create-zoom {
+    zoom: 0.73;
   }
 }

@@ -27,8 +27,9 @@ export default function AdminOrderDetailsPage() {
   const border = isDark ? 'border-slate-700/50' : 'border-neutral-800/20'
 
   return (
+    <main className="home-zoom overflow-x-hidden">
     <div className={isDark ? 'dark' : ''}>
-      <div className={`w-screen min-h-screen ${frameBg}`}>
+      <div className={`w-351 min-h-screen ${frameBg}`}>
         <div className="flex w-full min-h-full">
           {/* Sidebar */}
           <DashboardSidebar isDark={isDark} active="order" />
@@ -230,5 +231,6 @@ export default function AdminOrderDetailsPage() {
         </div>
       </div>
     </div>
+    </main>
   )
 }
