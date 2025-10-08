@@ -12,7 +12,7 @@ import SpeakersTestimonial from '../components/HomePage/SpeakersTestimonial'
 
 export default function HomePage() {
   return (
-    <main>
+    <main className="home-zoom overflow-x-hidden">
       <Hero />
       <Categories />
       <BestWeeklyDeals />
@@ -31,3 +31,4 @@ export default function HomePage() {
     </main>
   )
 }
+

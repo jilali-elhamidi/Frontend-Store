@@ -1,14 +1,11 @@
 export default function Login() {
   return (
-    <div className="w-full h-screen bg-white relative">
-      {/* Centered heading spanning both columns */}
-      <div className="hidden lg:block absolute top-6 left-1/2 -translate-x-1/2 z-10 text-emerald-900 text-3xl md:text-4xl font-bold">
-        ElghaziStore — Feel Welcome. Shop Easy
-      </div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 min-h-screen">
+    <div className="w-full h-screen bg-white relative overflow-hidden">
+      <div className="grid grid-cols-1 lg:grid-cols-2 h-screen overflow-y-auto hide-scrollbar">
         {/* Left illustration / marketing panel */}
-        <div className="hidden lg:flex items-center justify-center bg-[#9dcdbf] p-10">
+        <div className="hidden lg:flex items-start justify-center bg-[#9dcdbf] pt-16 pb-10 px-10">
           <div className="max-w-md text-center text-white space-y-6">
+            <h1 className="text-white text-3xl md:text-4xl font-bold mb-6">ElghaziStore — Feel Welcome. Shop Easy</h1>
             <img
               src="https://cdn.pixabay.com/photo/2020/07/08/15/24/cashier-5384210_1280.png"
               alt="Shopping illustration"
@@ -18,7 +15,7 @@ export default function Login() {
         </div>
 
         {/* Right form panel */}
-        <div className="flex items-start justify-start p-6 sm:p-10 pl-6 lg:pl-16 pt-28 lg:pt-38">
+        <div className="flex items-start justify-start p-6 sm:p-10 pl-6 lg:pl-16 pt-12 lg:pt-16">
           <div className="w-[500px] inline-flex flex-col items-start gap-6">
             <div className="w-full flex flex-col items-start gap-2">
               <div className="w-full text-left text-4xl font-bold leading-10">Welcome back</div>

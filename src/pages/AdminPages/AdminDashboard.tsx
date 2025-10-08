@@ -35,7 +35,7 @@ export default function AdminDashboardPage() {
   }
   return (
     <div className={isDark ? 'dark' : ''}>
-      <div className={`w-screen min-h-screen ${isDark ? 'bg-slate-800' : 'bg-slate-50'} dark:bg-slate-800`}>
+      <div className={`w-312 min-h-screen ${isDark ? 'bg-slate-800' : 'bg-slate-50'} dark:bg-slate-800`}>
         <div className="flex w-full min-h-full">
           {/* Sidebar */}
           <DashboardSidebar isDark={isDark} active="dashboard" />

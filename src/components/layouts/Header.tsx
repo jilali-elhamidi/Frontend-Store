@@ -1,14 +1,14 @@
 export default function Header() {
   return (
-   <header className="w-full flex justify-center bg-white ml-6 md:ml-10">
-      <div className="w-[1273.41px] h-28 relative border-b border-neutral-400/60">
+   <header className="w-full bg-white">
+      <div className="mx-auto w-full max-w-[1200px] h-28 relative border-b border-neutral-400/60 px-4 sm:px-6 lg:px-8">
         {/* Logo */}
         <div className="w-36 h-12 left-0 top-[30px] absolute">
           <img className="w-36 h-10 left-0 top-[5px] absolute" src="https://placehold.co/150x40" alt="Logo" />
         </div>
 
         {/* Hotline */}
-        <div className="w-56 h-11 left-[757px] top-[32.50px] absolute ">
+        <div className="w-56 h-11 right-[300px] top-[32.50px] absolute ">
           <div className="w-11 h-11 left-0 top-0 absolute bg-violet-100 rounded-3xl grid place-items-center">
             {/* Phone icon */}
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-black">
@@ -54,7 +54,7 @@ export default function Header() {
         </div>
 
         {/* Right actions */}
-        <div className="w-52 h-9 left-[1065.59px] top-[37px] absolute">
+        <div className="w-52 h-9 right-[30px] top-[37px] absolute">
           {/* refresh */}
           <div className="w-6 h-6 left-[25px] top-[5px] absolute">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-black">

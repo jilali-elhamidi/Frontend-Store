@@ -27,7 +27,7 @@ export default function Checkout() {
         </div>
       </div>
 
-      <div className="w-48 h-5 left-[6px] top-[200.79px] absolute justify-center text-black text-base font-bold leading-tight">Billing Detail</div>
+      <div className="w-48 h-5 left-[50px] top-[200.79px] absolute justify-center text-black text-base font-bold leading-tight">Billing Detail</div>
 
       <div className="w-20 h-5 left-[48px] top-[250.58px] absolute justify-center">
         <span className="text-black text-sm font-normal leading-tight">First Name </span>

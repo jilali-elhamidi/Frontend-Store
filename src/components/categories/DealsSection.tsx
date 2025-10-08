@@ -24,7 +24,7 @@ export default function DealsSection() {
       </div>
 
       {/* Cards grid */}
-      <div className="flex flex-wrap gap-6">
+      <div className="mx-auto max-w-[1200px] flex flex-wrap justify-center gap-6">
         <ProductCard
           title="Body Lotion For Dry Skin"
           price="$20.00"

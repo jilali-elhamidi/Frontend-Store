@@ -1,7 +1,7 @@
 export default function BestSeller() {
   return (
     <section className="mx-auto w-full max-w-[1330px] px-4 sm:px-6 lg:px-8 py-6">
-      <div className="w-[1330px] h-[656px] relative">
+      <div className="w-full h-[656px] relative">
         <div className="w-40 h-9 left-[15px] top-0 absolute justify-center text-black text-3xl font-bold leading-9">Best Seller</div>
         <div className="w-16 h-5 left-[1237.81px] top-[7.50px] absolute text-right justify-center text-black text-sm font-medium uppercase leading-tight">View All </div>
         <div className="w-1.5 h-3.5 left-[1309.73px] top-[11.50px] absolute text-right justify-center text-black leading-none">

@@ -10,7 +10,7 @@ import LatestBlog from '../../components/categories/LatestBlog'
 
 export default function CategoriesPage() {
   return (
-    <main>
+    <main className="home-zoom">
       {/* Breadcrumb */}
       <section className="mx-auto w-full max-w-[1330px] px-4 sm:px-6 lg:px-8 py-6">
         <div className="flex items-center gap-2 text-sm font-bold">
@@ -131,22 +131,22 @@ export default function CategoriesPage() {
       {/* Standalone full-width sections (same container as header) */}
       <section className="mx-auto w-full max-w-[1330px] px-4 sm:px-6 lg:px-8 py-6">
         {/* Day Of The Deal section */}
-        <div className="mt-4">
+        <div className="mt-4 ">
           <DealsSection />
         </div>
 
         {/* Fashion Sale banner */}
-        <div className="mt-6">
+        <div className="mt-6 mx-auto w-full max-w-[1330px]">
           <FashionSaleBanner />
         </div>
 
         {/* Trending / Top Rated / Top Selling */}
-        <div className="mt-6">
+        <div className="mt-6 mx-auto w-full max-w-[1330px]">
           <TrendingTopSelling />
         </div>
 
         {/* Latest Blog */}
-        <div className="mt-6">
+        <div className="mt-6 mx-auto w-full max-w-[1330px]">
           <LatestBlog />
         </div>
       </section>

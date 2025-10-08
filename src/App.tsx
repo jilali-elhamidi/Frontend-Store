@@ -5,23 +5,23 @@ import ProductDetails from './pages/Produit/ProductDetails'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
 import HomePage from './pages/HomePage'
-import CategoriesPage from './pages/Produit/CategoriesPage'
-import OrdersPage from './pages/Produit/OrdersPage'
-import CheckoutPage from './pages/Produit/CheckoutPage'
+import CategoriesPage from './pages/Produit/Categories'
+import OrdersPage from './pages/Produit/Orders'
+import CheckoutPage from './pages/Produit/Checkout'
 import CartPage from './pages/CartPage/CartPage'
-import SignupPage from './pages/AuthPages/SignupPage'
-import LoginPage from './pages/AuthPages/LoginPage'
-import AdminDashboardPage from './pages/AdminPages/AdminDashboardPage'
-import AdminOrdersPage from './pages/AdminPages/AdminOrdersPage'
-import AdminOrderDetailsPage from './pages/AdminPages/AdminOrderDetailsPage'
-import AdminProductsPage from './pages/AdminPages/AdminProductsPage'
-import AdminProductDetailsPage from './pages/AdminPages/AdminProductDetailsPage'
-import AdminProductCreatePage from './pages/AdminPages/AdminProductCreatePage'
-import AdminBlogListPage from './pages/AdminPages/AdminBlogListPage'
-import AdminBlogDetailsPage from './pages/AdminPages/AdminBlogDetailsPage'
-import AdminBlogCreatePage from './pages/AdminPages/AdminBlogCreatePage'
-import AdminChatPage from './pages/AdminPages/AdminChatPage'
-import AdminShippingPage from './pages/AdminPages/AdminShippingPage'
+import SignupPage from './pages/AuthPages/Signup'
+import LoginPage from './pages/AuthPages/Login'
+import AdminDashboardPage from './pages/AdminPages/AdminDashboard'
+import AdminOrdersPage from './pages/AdminPages/AdminOrders'
+import AdminOrderDetailsPage from './pages/AdminPages/AdminOrderDetails'
+import AdminProductsPage from './pages/AdminPages/AdminProducts'
+import AdminProductDetailsPage from './pages/AdminPages/AdminProductDetails'
+import AdminProductCreatePage from './pages/AdminPages/AdminProductCreate'
+import AdminBlogListPage from './pages/AdminPages/AdminBlogList'
+import AdminBlogDetailsPage from './pages/AdminPages/AdminBlogDetails'
+import AdminBlogCreatePage from './pages/AdminPages/AdminBlogCreate'
+import AdminChatPage from './pages/AdminPages/AdminChat'
+import AdminShippingPage from './pages/AdminPages/AdminShipping'
 
 function App() {
   const location = useLocation()
@@ -47,7 +47,7 @@ function App() {
     return () => mql?.removeEventListener?.('change', onChange)
   }, [])
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-900">
+    <div className="min-h-screen bg-white dark:bg-slate-900 overflow-x-hidden">
       {!hideChrome && <Header />}
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -76,4 +76,3 @@ function App() {
 }
 
 export default App
-

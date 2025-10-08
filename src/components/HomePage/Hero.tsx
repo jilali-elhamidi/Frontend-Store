@@ -24,7 +24,7 @@ export default function Hero() {
   }, [embla])
 
   return (
-    <section className="mx-auto w-full max-w-[1330px] px-4 sm:px-6 lg:px-8 pb-8 ml-6 md:ml-20">
+    <section className="mx-auto w-full max-w-[1330px] px-4 sm:px-6 lg:px-8 pb-8">
       <div className="grid gap-6 md:grid-cols-3">
         {/* Left: Big TV card with Embla carousel (2 slides) */}
         <div className="relative md:col-span-2 h-[480px] rounded-[20px] overflow-hidden">

@@ -106,3 +106,10 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+/* HomePage-only zoom on desktop */
+@media (min-width: 1280px) {
+  main.home-zoom {
+    zoom: 0.9;
+  }
+}

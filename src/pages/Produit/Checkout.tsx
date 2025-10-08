@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 
 export default function CheckoutPage() {
   return (
+    <main className="home-zoom">
     <section className="mx-auto w-full max-w-[1330px] px-4 sm:px-6 lg:px-8 py-6 ml-6 md:ml-10">
       {/* Breadcrumb */}
       <div className="flex items-center gap-2 py-5 text-sm font-bold">
@@ -23,5 +24,6 @@ export default function CheckoutPage() {
         </Link>
       </div>
     </section>
+    </main>
   )
 }

@@ -10,8 +10,8 @@ import {
 
 export default function AdminChatPage() {
   return (
-    <div className="min-h-screen w-full bg-teal-50">
-      <div className="w-[1727px] h-[925px] relative mx-auto">
+    <div className="min-h-screen w-full bg-teal-50 overflow-x-auto">
+      <div className="w-[1727px] h-[925px] relative mx-auto px-4 py-4 origin-top-left scale-[0.8] md:scale-[0.9] lg:scale-100">
         <div className="w-[1727px] h-[1116px] left-0 top-0 absolute">
           <div className="w-[1727px] h-[1116px] left-0 top-0 absolute bg-teal-50">
             <div className="w-[1447px] h-px left-[280px] top-0 absolute border-b-1 border-gray-100" />

@@ -1,7 +1,7 @@
 export default function Signup() {
   return (
-    <div className="w-full h-screen bg-white">
-      <div className="grid grid-cols-1 lg:grid-cols-2 min-h-screen">
+    <div className="w-full h-screen bg-white overflow-hidden">
+      <div className="grid grid-cols-1 lg:grid-cols-2 h-screen overflow-y-auto no-scrollbar">
         {/* Left illustration / marketing panel */}
         <div className="hidden lg:flex items-center justify-center bg-orange-300/90 p-10">
           <div className="max-w-md text-center text-white space-y-6">

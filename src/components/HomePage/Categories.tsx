@@ -24,47 +24,48 @@ export default function Categories() {
 
   return (
     <section className="mx-auto w-full max-w-[1330px] px-4 sm:px-6 lg:px-8 py-6">
-      <div className="w-fit ml-auto">
-      {/* Title row */}
-      <div className="mb-4 flex items-center justify-between">
-        <h2 className="text-[22px] font-bold leading-7">Popular Categories</h2>
-        <a href="#" className="group inline-flex items-center gap-1 text-sm leading-tight text-gray-700 hover:text-gray-900">
-          <span>View All</span>
-          <svg className="h-4 w-4 transition-transform group-hover:translate-x-0.5" viewBox="0 0 20 20" fill="currentColor">
-            <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 111.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
-          </svg>
-        </a>
-      </div>
+      <div>
+        {/* Title row */}
+        <div className="mb-4 flex items-center justify-between">
+          <h2 className="text-[22px] font-bold leading-7">Popular Categories</h2>
+          <a href="#" className="group inline-flex items-center gap-1 text-sm leading-tight text-gray-700 hover:text-gray-900">
+            <span>View All</span>
+            <svg className="h-4 w-4 transition-transform group-hover:translate-x-0.5" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 111.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+            </svg>
+          </a>
+        </div>
 
-      {/* Carousel */}
-      <div className="relative">
-        {/* Arrows */}
-        <button onClick={scrollPrev} aria-label="Previous" className="absolute -left-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white shadow ring-1 ring-black/5 p-2 hover:bg-gray-50">
-          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" className="text-gray-700">
-            <path d="M12.5 15l-5-5 5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </button>
-        <button onClick={scrollNext} aria-label="Next" className="absolute -right-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white shadow ring-1 ring-black/5 p-2 hover:bg-gray-50">
-          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" className="text-gray-700">
-            <path d="M7.5 5l5 5-5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </button>
+        {/* Carousel */}
+        <div className="relative">
+          {/* Arrows */}
+          <button onClick={scrollPrev} aria-label="Previous" className="absolute -left-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white shadow ring-1 ring-black/5 p-2 hover:bg-gray-50">
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="none" className="text-gray-700">
+              <path d="M12.5 15l-5-5 5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
+          <button onClick={scrollNext} aria-label="Next" className="absolute -right-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white shadow ring-1 ring-black/5 p-2 hover:bg-gray-50">
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="none" className="text-gray-700">
+              <path d="M7.5 5l5 5-5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
 
-        {/* Viewport */}
-        <div className="overflow-hidden" ref={viewportRef}>
-          <div className="flex gap-6">
-            {items.map((it) => (
-              <div key={it.label} className="shrink-0 w-28">
-                <div className="relative mx-auto grid h-28 w-28 place-items-center rounded-[55px] bg-gray-200 shadow-[0_1px_2px_rgba(0,0,0,0.04),_0_4px_12px_rgba(0,0,0,0.06)] overflow-hidden">
-                  <img src={it.img} alt={it.label} className="h-14 w-20 object-contain" />
+          {/* Viewport */}
+          <div className="overflow-hidden" ref={viewportRef}>
+            <div className="flex gap-6">
+              {items.map((it) => (
+                <div key={it.label} className="shrink-0 w-28">
+                  <div className="relative mx-auto grid h-28 w-28 place-items-center rounded-[55px] bg-gray-200 shadow-[0_1px_2px_rgba(0,0,0,0.04),_0_4px_12px_rgba(0,0,0,0.06)] overflow-hidden">
+                    <img src={it.img} alt={it.label} className="h-14 w-20 object-contain" />
+                  </div>
+                  <div className="mt-3 text-center text-[12px] font-bold leading-snug text-black">{it.label}</div>
                 </div>
-                <div className="mt-3 text-center text-[12px] font-bold leading-snug text-black">{it.label}</div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
-      </div>
       </div>
     </section>
   )
 }
+
