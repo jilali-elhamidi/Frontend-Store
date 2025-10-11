@@ -10,6 +10,7 @@ const AdminBlogCreatePage: React.FC = () => {
   const fileInputRef = useRef<HTMLInputElement | null>(null)
   const [seoTitle, setSeoTitle] = useState('')
   const [seoDescription, setSeoDescription] = useState('')
+  const [mobileOpen, setMobileOpen] = useState(false)
 
   const onCancel = () => {
     // Reset fields for now
@@ -47,18 +48,107 @@ const AdminBlogCreatePage: React.FC = () => {
   return (
     
     <div className={isDark ? 'dark' : ''}>
-      <div className={`w-screen min-h-screen ${frameBg}`}>
+      <div className={`w-screen lg:w-421 min-h-screen ${frameBg}`}>
         <div className="flex w-full min-h-full">
-          {/* Sidebar */}
-           <aside className="home-zoom">
-                      <DashboardSidebar isDark={isDark} active="blog" />
-                    </aside>
+          {/* Sidebar (desktop) */}
+          <aside className="hidden lg:block">
+            <DashboardSidebar isDark={isDark} active="blog" />
+          </aside>
+
+          {/* Sidebar (mobile drawer) */}
+          {mobileOpen && (
+            <div className="fixed inset-0 z-50 lg:hidden">
+              <div className="absolute inset-0 bg-black/40" onClick={() => setMobileOpen(false)} aria-hidden="true" />
+              <div className={`absolute left-0 top-0 h-full w-80 max-w-[80%] ${isDark ? 'bg-slate-800' : 'bg-white'} shadow-xl`}>
+                <div className="flex items-center justify-between px-3 py-3 border-b border-slate-200 dark:border-slate-700">
+                  <span className={`text-sm font-medium ${isDark ? 'text-slate-200' : 'text-slate-800'}`}>Menu</span>
+                  <button className="p-2 rounded-md hover:bg-black/5 dark:hover:bg-white/10" onClick={() => setMobileOpen(false)}>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={`h-5 w-5 ${isDark ? 'text-slate-200' : 'text-slate-700'}`}>
+                      <path d="M6 6l12 12M6 18L18 6" />
+                    </svg>
+                  </button>
+                </div>
+                <div className="h-[calc(100%-56px)] overflow-y-auto">
+                  <DashboardSidebar isDark={isDark} active="blog" />
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* Main content */}
-          <main className="blog-create-zoom ">
+          <main className="flex-1">
+          {/* Top bar (mobile) */}
+          <div className="lg:hidden flex items-center gap-2 p-3">
+            <button
+              type="button"
+              className="inline-flex items-center justify-center p-2 rounded-md hover:bg-black/5 dark:hover:bg-white/10"
+              onClick={() => setMobileOpen(true)}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={`${isDark ? 'text-slate-200' : 'text-slate-700'} h-5 w-5`}>
+                <path d="M3 6h18M3 12h18M3 18h18" />
+              </svg>
+            </button>
+            <h1 className={`text-lg font-semibold ${isDark ? 'text-slate-100' : 'text-slate-900'}`}>Create Post</h1>
+          </div>
+
           <div className="flex-1 min-h-screen">
-            <div className="max-w-[1460px] mx-auto px-6 py-8">
-              {/* Canvas following the provided absolute layout */}
-              <div className={`w-[1492px] h-[2142px] relative ${isDark ? 'bg-slate-900' : 'bg-neutral-100'} rounded-2xl overflow-hidden`}>
+            <div className="max-w-[1460px] mx-auto px-4 sm:px-6 py-6 sm:py-8">
+              {/* Mobile stacked form */}
+              <div className="lg:hidden flex flex-col gap-4">
+                <div className="flex items-center justify-between">
+                  <div className={`text-2xl font-bold ${textSub}`}>Create a new post</div>
+                  <div className="flex items-center gap-2">
+                    <button onClick={onCancel} className={`h-10 px-3 rounded-xl ${isDark ? 'bg-slate-800 text-slate-200' : 'bg-white text-gray-900'} outline outline-1 ${isDark ? 'outline-slate-700' : 'outline-gray-200'}`}>Cancel</button>
+                    <button onClick={onPublish} className="h-10 px-4 rounded-xl bg-indigo-500 text-white font-semibold">Publish</button>
+                  </div>
+                </div>
+
+                {/* Basic details */}
+                <div className={`${cardBg} rounded-2xl p-4 space-y-3`}>
+                  <div className={`text-base font-bold ${textSub}`}>Basic details</div>
+                  <div>
+                    <label className={`block text-sm ${textMuted}`}>Post title</label>
+                    <input value={title} onChange={(e)=>setTitle(e.target.value)} className={`w-full h-11 rounded-lg px-3 bg-white outline outline-1 ${isDark ? 'outline-slate-700 bg-slate-800 text-slate-200 placeholder:text-slate-400' : 'outline-gray-200 text-gray-900 placeholder:text-gray-500'}`} placeholder="Title" />
+                  </div>
+                  <div>
+                    <label className={`block text-sm ${textMuted}`}>Short description</label>
+                    <input value={description} onChange={(e)=>setDescription(e.target.value)} className={`w-full h-11 rounded-lg px-3 bg-white outline outline-1 ${isDark ? 'outline-slate-700 bg-slate-800 text-slate-200 placeholder:text-slate-400' : 'outline-gray-200 text-gray-900 placeholder:text-gray-500'}`} placeholder="Short description" />
+                  </div>
+                </div>
+
+                {/* Post cover */}
+                <div className={`${cardBg} rounded-2xl p-4 space-y-3`}>
+                  <div className={`text-base font-bold ${textSub}`}>Post cover</div>
+                  <img src={coverPreview} alt="cover" className="w-full h-40 object-cover rounded-lg" />
+                  <div className="flex items-center gap-2">
+                    <button onClick={() => setCoverPreview('https://placehold.co/861x230')} className={`underline ${textSub}`}>Remove photo</button>
+                    <button onClick={onPickCover} className="ml-auto h-10 px-3 rounded-lg bg-indigo-500 text-white">Upload</button>
+                  </div>
+                  <input ref={fileInputRef} onChange={onCoverChange} type="file" accept="image/*" className="hidden" />
+                  <div className={`${textMuted} text-sm`}>(SVG, JPG, PNG, or gif maximum 900x400)</div>
+                </div>
+
+                {/* Content */}
+                <div className={`${cardBg} rounded-2xl p-4 space-y-3`}>
+                  <div className={`text-base font-bold ${textSub}`}>Content</div>
+                  <textarea value={content} onChange={(e)=>setContent(e.target.value)} placeholder="Write something" className={`w-full h-40 resize-none rounded-lg p-3 outline outline-1 ${isDark ? 'outline-slate-700 bg-slate-800 text-slate-200 placeholder:text-slate-400' : 'outline-gray-200 bg-white text-gray-900 placeholder:text-gray-500'}`} />
+                </div>
+
+                {/* Meta */}
+                <div className={`${cardBg} rounded-2xl p-4 space-y-3`}>
+                  <div className={`text-base font-bold ${textSub}`}>Meta</div>
+                  <div>
+                    <label className={`block text-sm ${textMuted}`}>SEO title</label>
+                    <input value={seoTitle} onChange={(e)=>setSeoTitle(e.target.value)} className={`w-full h-11 rounded-lg px-3 bg-white outline outline-1 ${isDark ? 'outline-slate-700 bg-slate-800 text-slate-200 placeholder:text-slate-400' : 'outline-gray-200 text-gray-900 placeholder:text-gray-500'}`} placeholder="SEO title" />
+                  </div>
+                  <div>
+                    <label className={`block text-sm ${textMuted}`}>SEO description</label>
+                    <input value={seoDescription} onChange={(e)=>setSeoDescription(e.target.value)} className={`w-full h-11 rounded-lg px-3 bg-white outline outline-1 ${isDark ? 'outline-slate-700 bg-slate-800 text-slate-200 placeholder:text-slate-400' : 'outline-gray-200 text-gray-900 placeholder:text-gray-500'}`} placeholder="SEO description" />
+                  </div>
+                </div>
+              </div>
+              {/* Canvas following the provided absolute layout (desktop/tablet) */}
+              <div className={`hidden lg:block w-[1492px] h-[2142px] relative ${isDark ? 'bg-slate-900' : 'bg-neutral-100'} rounded-2xl overflow-hidden`}>
                 <div className="w-[1492px] h-[2142px] left-0 top-0 absolute">
                   <div className="w-[1400px] h-[1696.48px] left-[38px] top-[63.99px] absolute">
                     <div className={`w-80 h-11 left-[23.99px] top-[-1.11px] absolute justify-center ${textSub} text-4xl font-bold font-['Plus_Jakarta_Sans'] leading-10`}>Create a new post</div>

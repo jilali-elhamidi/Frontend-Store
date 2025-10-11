@@ -4,6 +4,7 @@ import DashboardSidebar from '../../components/Admin/DashboardSidebar'
 const AdminBlogDetailsPage: React.FC = () => {
   const [isDark, setIsDark] = useState(false)
   const [commentText, setCommentText] = useState('')
+  const [mobileOpen, setMobileOpen] = useState(false)
 
   const handleSend = () => {
     const text = commentText.trim()
@@ -27,18 +28,125 @@ const AdminBlogDetailsPage: React.FC = () => {
   return (
     <main className="overflow-x-hidden">  
     <div className={isDark ? 'dark' : ''}>
-      <div className={`w-421 min-h-screen ${frameBg}`}>
+      <div className={`w-screen lg:w-421 min-h-screen  ${frameBg}`}>
         <div className="flex w-full min-h-full">
-          {/* Sidebar */}
-          <aside className="home-zoom">
+          {/* Sidebar (desktop) */}
+          <aside className="hidden lg:block">
             <DashboardSidebar isDark={isDark} active="blog" />
           </aside>
-          <main className="blog-detail-zoom ">  
+
+          {/* Sidebar (mobile drawer) */}
+          {mobileOpen && (
+            <div className="fixed inset-0 z-50 lg:hidden">
+              <div className="absolute inset-0 bg-black/40" onClick={() => setMobileOpen(false)} aria-hidden="true" />
+              <div className={`absolute left-0 top-0 h-full w-80 max-w-[80%] ${isDark ? 'bg-slate-800' : 'bg-white'} shadow-xl`}>
+                <div className="flex items-center justify-between px-3 py-3 border-b border-slate-200 dark:border-slate-700">
+                  <span className={`text-sm font-medium ${isDark ? 'text-slate-200' : 'text-slate-800'}`}>Menu</span>
+                  <button className="p-2 rounded-md hover:bg-black/5 dark:hover:bg-white/10" onClick={() => setMobileOpen(false)}>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={`h-5 w-5 ${isDark ? 'text-slate-200' : 'text-slate-700'}`}>
+                      <path d="M6 6l12 12M6 18L18 6" />
+                    </svg>
+                  </button>
+                </div>
+                <div className="h-[calc(100%-56px)] overflow-y-auto">
+                  <DashboardSidebar isDark={isDark} active="blog" />
+                </div>
+              </div>
+            </div>
+          )}
+
+          <main className="flex-1">  
+          {/* Top bar (mobile) */}
+          <div className="lg:hidden flex items-center gap-2 p-3">
+            <button
+              type="button"
+              className="inline-flex items-center justify-center p-2 rounded-md hover:bg-black/5 dark:hover:bg-white/10"
+              onClick={() => setMobileOpen(true)}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={`${isDark ? 'text-slate-200' : 'text-slate-700'} h-5 w-5`}>
+                <path d="M3 6h18M3 12h18M3 18h18" />
+              </svg>
+            </button>
+            <h1 className={`text-lg font-semibold ${isDark ? 'text-slate-100' : 'text-slate-900'}`}>Post</h1>
+          </div>
+
           {/* Main content */}
           <div className="flex-1 min-h-screen">
-            <div className="max-w-[1460px] mx-auto px-6 py-8">
-              {/* Absolute-positioned canvas per provided design */}
-              <div className="w-[1423px] h-[2744px] relative bg-neutral-100 rounded-2xl overflow-hidden">
+            <div className="max-w-[1460px] mx-auto px-4 sm:px-6 py-6 sm:py-8">
+              {/* Mobile stacked article */}
+              <div className="lg:hidden flex flex-col gap-4">
+                <div className={`text-xs inline-block w-max px-2 py-1 rounded-full ${isDark ? 'bg-white/10 text-slate-200' : 'bg-gray-900/10 text-gray-900'}`}>Programming</div>
+                <h2 className={`text-2xl font-bold ${textSub}`}>Why I Still Lisp, and You Should Too</h2>
+                <div className={`${textMuted}`}>Aliquam dapibus elementum nulla at malesuada. Ut mi nisl, aliquet non mollis vel, feugiat non nibh.</div>
+                <div className="flex items-center gap-2 text-sm">
+                  <img className="w-8 h-8 rounded-full object-cover" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=256&auto=format&fit=crop" alt="author" />
+                  <div className={`${textSub}`}>By Jie Yan Song • February 1, 2024</div>
+                  <div className={`${textMuted} ml-auto`}>5 min read</div>
+                </div>
+                <img className="w-full h-48 rounded-lg object-cover" src="https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=1600&auto=format&fit=crop" alt="cover" />
+                <h3 className={`text-lg font-semibold ${textSub}`}>Cras at molestie lacus. Phasellus feugiat leo quis sem iaculis, sed mattis nibh accumsan.</h3>
+                <p className={`${textSub} text-sm`}>Phasellus ullamcorper ultrices ullamcorper. Nunc auctor porttitor ex, non consequat ipsum aliquam at. Duis dapibus dolor in nisi viverra, a elementum nulla viverra. Etiam feugiat turpis leo, nec finibus diam rhoncus ac. Sed at metus et orci consequat facilisis vel vel diam.</p>
+                <p className={`${textSub} text-sm`}>Etiam faucibus massa auctor gravida finibus. Cras nulla magna, dapibus sit amet accumsan nec, ullamcorper sit amet dolor.</p>
+                <div className={`${isDark ? 'bg-slate-800' : 'bg-gray-800'} rounded-lg p-3 text-slate-300 text-xs font-mono`}>
+                  {'// This is a comment'}{'\n'}{'const x = () ='}{'>'}{' {};' }
+                </div>
+                <p className={`${textSub} text-sm`}>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos...</p>
+                {/* Comments (mobile) */}
+                <div className="space-y-3">
+                  <div className={`${isDark ? 'bg-slate-800/50' : 'bg-gray-100'} rounded-lg p-3`}>
+                    <div className="flex items-start gap-2">
+                      <img className="w-8 h-8 rounded-full object-cover" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=256&auto=format&fit=crop" alt="avatar" />
+                      <div className="flex-1">
+                        <div className={`text-sm font-medium ${textSub}`}>Alcides Antonio <span className={`${textMuted} text-xs font-normal`}>• about 2 hours ago</span></div>
+                        <div className={`${textSub} text-sm mt-1`}>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className={`${isDark ? 'bg-slate-800/50' : 'bg-gray-100'} rounded-lg p-3`}>
+                    <div className="flex items-start gap-2">
+                      <img className="w-8 h-8 rounded-full object-cover" src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?q=80&w=256&auto=format&fit=crop" alt="avatar" />
+                      <div className="flex-1">
+                        <div className={`text-sm font-medium ${textSub}`}>Jie Yan Song <span className={`${textMuted} text-xs font-normal`}>• about 8 hours ago</span></div>
+                        <div className={`${textSub} text-sm mt-1`}>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {/* Add comment */}
+                <div className={`${isDark ? 'bg-slate-800/40 border border-slate-700' : 'bg-gray-900/5 border border-gray-200'} rounded-lg p-3`}>
+                  <textarea
+                    value={commentText}
+                    onChange={(e) => setCommentText(e.target.value)}
+                    placeholder="Add a comment"
+                    className={`w-full h-24 resize-none bg-transparent rounded-md p-3 text-sm ${textSub} placeholder:${textMuted} outline-none`}
+                  />
+                  {/* Action icons under the comment box */}
+                  <div className="mt-2 flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      {/* Image icon */}
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke={isDark ? '#94a3b8' : '#64748b'} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+                        <rect x="3" y="5" width="18" height="14" rx="2" ry="2" />
+                        <circle cx="8.5" cy="10" r="1.8" />
+                        <path d="M21 16l-5.5-5.5L11 15l-2.5-2.5L3 18" />
+                      </svg>
+                      {/* Paperclip icon */}
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke={isDark ? '#94a3b8' : '#64748b'} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+                        <path d="M21.44 11.05 12 20.5a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 1 1 5.66 5.66L9.17 17.17a2 2 0 1 1-2.83-2.83l8.49-8.49" />
+                      </svg>
+                      {/* Smiley icon */}
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke={isDark ? '#94a3b8' : '#64748b'} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+                        <circle cx="12" cy="12" r="9" />
+                        <path d="M9 10h.01" />
+                        <path d="M15 10h.01" />
+                        <path d="M8 15s1.5 2 4 2 4-2 4-2" />
+                      </svg>
+                    </div>
+                    <button onClick={handleSend} className="h-10 px-4 rounded-xl bg-indigo-500 text-white text-sm font-semibold">Send</button>
+                  </div>
+                </div>
+              </div>
+              {/* Absolute-positioned canvas per provided design (desktop/tablet) */}
+              <div className="hidden lg:block w-[1423px] h-[2744px] relative bg-neutral-100 rounded-2xl overflow-hidden">
                 <div className="w-[1423px] h-[2744px] left-0 top-0 absolute">
                   <div className="w-[1400px] h-[2615.59px] left-0 top-[90.99px] absolute">
                     {/* Top heading + breadcrumb */}

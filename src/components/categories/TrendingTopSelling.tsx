@@ -112,7 +112,7 @@ export default function TrendingTopSelling() {
   )
 
   return (
-    <section className="mx-auto w-full max-w-[1330px] px-4 sm:px-6 lg:px-8 py-6 -ml-20 md:-ml-6">
+    <section className="mx-auto w-full max-w-[1330px] px-4 sm:px-6 lg:px-8 py-6 ml-0 lg:-ml-6">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         <Section titleLeft="Trending" titleRight="Items" items={trending} />
         <Section titleLeft="Top" titleRight="Rated" items={topRated} />

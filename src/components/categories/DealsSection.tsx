@@ -4,9 +4,9 @@ export default function DealsSection() {
   return (
     <section className="mx-auto w-full max-w-[1330px] px-4 sm:px-6 lg:px-8 py-8">
       {/* Header */}
-      <div className="mb-4 flex items-center justify-between">
+      <div className="mb-4 flex items-center justify-between flex-col sm:flex-row gap-3">
         <h2 className="text-xl font-extrabold">
-          <span className="text-orange-400 -ml-20 md:-ml-10 ">Day Of The</span> <span className="text-neutral-800">Deal</span>
+          <span className="text-orange-400 ml-0 lg:-ml-6 ">Day Of The</span> <span className="text-neutral-800">Deal</span>
         </h2>
         <div className="text-[11px] font-semibold px-3 py-1.5 rounded-lg bg-orange-50 text-orange-500 ring-1 ring-orange-200">
           25 Days 23 : 59 : 54
@@ -14,7 +14,7 @@ export default function DealsSection() {
       </div>
 
       {/* Promo image banner */}
-      <div className="mb-6 -ml-20 md:-ml-10">
+      <div className="mb-6 ml-0 lg:-ml-6">
         <img
           src="https://images.pexels.com/photos/3806753/pexels-photo-3806753.jpeg"
           alt="Deals promo"

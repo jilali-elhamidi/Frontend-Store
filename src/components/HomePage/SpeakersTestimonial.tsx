@@ -18,39 +18,76 @@ export default function SpeakersTestimonial({ avatar }: { avatar?: string }) {
   )
 
   return (
-    <div className="w-full md:flex-none md:basis-[652px] h-[454.33px] relative bg-violet-100 rounded-[20px] overflow-hidden">
-      <div className="left-[30px] top-[32px] absolute text-black text-3xl font-bold leading-9">Best Selling Speakers</div>
-      <div className="left-auto right-[84px] top-[30px] absolute bg-white rounded-[20px] h-10 w-10 grid place-items-center">
-        <ChevronLeft />
-      </div>
-      <div className="left-auto right-[30px] top-[30px] absolute bg-white rounded-[20px] h-10 w-10 grid place-items-center">
-        <ChevronRight />
-      </div>
-
-      <div className="w-[530px] md:w-[600px] h-80 left-[20px] top-[110px] absolute bg-white rounded-[20px] p-6">
-        <div className="flex items-center gap-1">
-          <Star /> <Star /> <Star /> <Star /> <Star />
-        </div>
-        <div className="mt-2 text-black text-lg font-bold leading-snug">Fast shipping and flexiable price!</div>
-        <div className="mt-3 text-black text-sm leading-relaxed pr-4">
-          I used to have experience shopping on much platform as Amozon, Eboy,
-          Esto, etc. And see that Swoo Market really great. It’ll be my 1st choice for
-          any shopping experience. Competitive price, fast shipping and support
-          24/7. Extremely recommended!
+    <div className="w-full md:flex-none md:basis-[652px] relative bg-violet-100 rounded-[20px] overflow-hidden">
+      {/* Mobile stacked version */}
+      <div className="sm:hidden p-4 space-y-3">
+        <div className="flex items-center justify-between">
+          <h3 className="text-black text-2xl font-bold leading-9">Best Selling Speakers</h3>
+          <div className="flex items-center gap-1">
+            <div className="bg-white rounded-[20px] h-8 w-8 grid place-items-center"><ChevronLeft /></div>
+            <div className="bg-white rounded-[20px] h-8 w-8 grid place-items-center"><ChevronRight /></div>
+          </div>
         </div>
 
-        <div className="absolute left-6 right-6 bottom-6 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <img className="w-10 h-10 rounded-full object-cover" src={avatar || defaultAvatar} alt="Avatar" />
-            <div>
-              <div className="text-black text-lg font-bold leading-snug">Drake N.</div>
-              <div className="flex items-center gap-2">
-                <span className="text-green-700 text-[10px] font-bold uppercase leading-3">Verified Buyer</span>
-                <span className="text-stone-500 text-xs leading-tight">Brooklyn, Los Angeles</span>
+        <div className="w-full bg-white rounded-[20px] p-4 space-y-3">
+          <div className="flex items-center gap-1">
+            <Star /> <Star /> <Star /> <Star /> <Star />
+          </div>
+          <div className="text-black text-base font-bold leading-snug">Fast shipping and flexiable price!</div>
+          <div className="text-black text-sm leading-relaxed">
+            I used to have experience shopping on much platform as Amozon, Eboy, Esto, etc. And see that Swoo Market really great. It’ll be my 1st choice for any shopping experience. Competitive price, fast shipping and support 24/7. Extremely recommended!
+          </div>
+          <div className="flex items-center justify-between pt-1">
+            <div className="flex items-center gap-3">
+              <img className="w-10 h-10 rounded-full object-cover" src={avatar || defaultAvatar} alt="Avatar" />
+              <div>
+                <div className="text-black text-base font-bold leading-snug">Drake N.</div>
+                <div className="flex items-center gap-2">
+                  <span className="text-green-700 text-[10px] font-bold uppercase leading-3">Verified Buyer</span>
+                  <span className="text-stone-500 text-xs leading-tight">Brooklyn, Los Angeles</span>
+                </div>
               </div>
             </div>
+            <div className="text-orange-300 text-xs font-semibold underline text-right">Marshall Standmore Speaker / Black</div>
           </div>
-          <div className="text-orange-300 text-xs font-semibold underline text-right">Marshall Standmore Speaker / Black</div>
+        </div>
+      </div>
+
+      {/* Original absolute layout for tablet/desktop */}
+      <div className="hidden sm:block h-[454.33px] relative">
+        <div className="left-[30px] top-[32px] absolute text-black text-3xl font-bold leading-9">Best Selling Speakers</div>
+        <div className="left-auto right-[84px] top-[30px] absolute bg-white rounded-[20px] h-10 w-10 grid place-items-center">
+          <ChevronLeft />
+        </div>
+        <div className="left-auto right-[30px] top-[30px] absolute bg-white rounded-[20px] h-10 w-10 grid place-items-center">
+          <ChevronRight />
+        </div>
+
+        <div className="w-[530px] md:w-[600px] h-80 left-[20px] top-[110px] absolute bg-white rounded-[20px] p-6">
+          <div className="flex items-center gap-1">
+            <Star /> <Star /> <Star /> <Star /> <Star />
+          </div>
+          <div className="mt-2 text-black text-lg font-bold leading-snug">Fast shipping and flexiable price!</div>
+          <div className="mt-3 text-black text-sm leading-relaxed pr-4">
+            I used to have experience shopping on much platform as Amozon, Eboy,
+            Esto, etc. And see that Swoo Market really great. It’ll be my 1st choice for
+            any shopping experience. Competitive price, fast shipping and support
+            24/7. Extremely recommended!
+          </div>
+
+          <div className="absolute left-6 right-6 bottom-6 flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <img className="w-10 h-10 rounded-full object-cover" src={avatar || defaultAvatar} alt="Avatar" />
+              <div>
+                <div className="text-black text-lg font-bold leading-snug">Drake N.</div>
+                <div className="flex items-center gap-2">
+                  <span className="text-green-700 text-[10px] font-bold uppercase leading-3">Verified Buyer</span>
+                  <span className="text-stone-500 text-xs leading-tight">Brooklyn, Los Angeles</span>
+                </div>
+              </div>
+            </div>
+            <div className="text-orange-300 text-xs font-semibold underline text-right">Marshall Standmore Speaker / Black</div>
+          </div>
         </div>
       </div>
     </div>

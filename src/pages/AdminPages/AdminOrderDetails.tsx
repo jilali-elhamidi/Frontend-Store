@@ -1,10 +1,13 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import DashboardSidebar from '../../components/Admin/DashboardSidebar'
 
 export default function AdminOrderDetailsPage() {
   const { id = '#6743' } = useParams()
   const [isDark, setIsDark] = useState<boolean>(false)
+  const [mobileOpen, setMobileOpen] = useState<boolean>(false)
+  const touchStartX = useRef<number | null>(null)
+  const touchCurrentX = useRef<number | null>(null)
 
   useEffect(() => {
     const saved = localStorage.getItem('theme')
@@ -29,13 +32,87 @@ export default function AdminOrderDetailsPage() {
   return (
     <main className="home-zoom overflow-x-hidden">
     <div className={isDark ? 'dark' : ''}>
-      <div className={`w-351 min-h-screen ${frameBg}`}>
-        <div className="flex w-full min-h-full">
-          {/* Sidebar */}
-          <DashboardSidebar isDark={isDark} active="order" />
+      <div className={`w-screen lg:w-351 min-h-screen ${frameBg}`}>
+        <div className="flex flex-col lg:flex-row w-full min-h-full">
+          {/* Sidebar (desktop) */}
+          <aside className="hidden lg:block">
+            <DashboardSidebar isDark={isDark} active="order" />
+          </aside>
+
+          {/* Sidebar (mobile drawer) */}
+          {mobileOpen && (
+            <div className="fixed inset-0 z-50 lg:hidden">
+              <div
+                className="absolute inset-0 bg-black/40"
+                onClick={() => setMobileOpen(false)}
+                aria-hidden="true"
+              />
+              <div
+                className={`${isDark ? 'bg-slate-800' : 'bg-white'} absolute left-0 top-0 h-full w-72 max-w-[85%] shadow-xl transform transition-transform duration-300 ease-out translate-x-0`}
+                onTouchStart={(e) => {
+                  touchStartX.current = e.touches[0].clientX
+                  touchCurrentX.current = e.touches[0].clientX
+                }}
+                onTouchMove={(e) => {
+                  touchCurrentX.current = e.touches[0].clientX
+                }}
+                onTouchEnd={() => {
+                  if (
+                    touchStartX.current !== null &&
+                    touchCurrentX.current !== null &&
+                    touchCurrentX.current - touchStartX.current > 60
+                  ) {
+                    setMobileOpen(false)
+                  }
+                  touchStartX.current = null
+                  touchCurrentX.current = null
+                }}
+              >
+                <div className="flex items-center justify-between px-4 py-3 border-b border-slate-200 dark:border-slate-700">
+                  <span className={`text-sm font-medium ${isDark ? 'text-slate-200' : 'text-slate-800'}`}>Menu</span>
+                  <button
+                    className="p-2 rounded-md hover:bg-black/5 dark:hover:bg-white/10"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      className={`h-5 w-5 ${isDark ? 'text-slate-200' : 'text-slate-700'}`}
+                    >
+                      <path d="M6 6l12 12M6 18L18 6" />
+                    </svg>
+                  </button>
+                </div>
+                <DashboardSidebar isDark={isDark} active="order" />
+              </div>
+            </div>
+          )}
 
           {/* Main content */}
-          <main className="flex-1 p-6 flex flex-col gap-5">
+          <main className="flex-1 p-4 sm:p-6 flex flex-col gap-4 sm:gap-5">
+            {/* Top bar */}
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                className="lg:hidden inline-flex items-center justify-center p-2 rounded-md hover:bg-black/5 dark:hover:bg-white/10"
+                onClick={() => setMobileOpen(true)}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  className={`h-5 w-5 ${isDark ? 'text-slate-200' : 'text-slate-700'}`}
+                >
+                  <path d="M3 6h18M3 12h18M3 18h18" />
+                </svg>
+              </button>
+              <h1 className={`text-lg sm:text-xl font-semibold ${isDark ? 'text-slate-100' : 'text-slate-900'}`}>Order Details</h1>
+            </div>
             {/* Header */}
             <div className="inline-flex flex-col justify-start items-start gap-4 w-full">
               <div className="inline-flex justify-start items-end gap-6 w-full">
@@ -45,6 +122,36 @@ export default function AdminOrderDetailsPage() {
                     Home &gt; Order List &gt; Order Details
                   </div>
                 </div>
+              </div>
+
+              {/* Mobile cards (no horizontal scroll) */}
+              <div className="flex flex-col sm:hidden gap-3 w-full">
+                {[1, 2].map((i) => (
+                  <div
+                    key={i}
+                    className={`rounded-xl p-4 border ${border} flex flex-col gap-3 ${
+                      isDark ? 'bg-slate-800/40' : 'bg-white'
+                    }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 bg-black/20 rounded-lg" />
+                    </div>
+                    <div className={`grid grid-cols-2 gap-2 text-xs ${isDark ? 'text-slate-300' : 'text-neutral-700'}`}>
+                      <div>
+                        <div className="opacity-70">Order ID</div>
+                        <div className="font-semibold text-[13px]">#25421</div>
+                      </div>
+                      <div className="text-right">
+                        <div className="opacity-70">Quantity</div>
+                        <div className="font-semibold text-[13px]">2</div>
+                      </div>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <div className={`${textMain} text-sm font-semibold`}>Lorem Ipsum</div>
+                      <div className={`${textMain} font-semibold`}>₹800.40</div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
 
@@ -169,7 +276,7 @@ export default function AdminOrderDetailsPage() {
             </div>
 
             {/* Products table */}
-            <div className={`w-full px-4 py-6 ${tableCardBg} rounded-3xl inline-flex flex-col justify-start items-start gap-4`}>
+            <div className={`w-full px-3 sm:px-4 py-4 sm:py-6 ${tableCardBg} rounded-3xl inline-flex flex-col justify-start items-start gap-3 sm:gap-4`}>
               <div className="self-stretch inline-flex justify-between items-center">
                 <div className={`justify-start ${textMain} text-xl font-semibold font-['Rubik']`}>Products</div>
                 <div className="w-6 h-6 relative overflow-hidden">
@@ -178,49 +285,54 @@ export default function AdminOrderDetailsPage() {
               </div>
               <div className={`self-stretch h-0 outline outline-[0.50px] outline-offset-[-0.25px] ${border}`}></div>
 
-              <div className={`self-stretch border-b-[0.50px] ${border} inline-flex justify-between items-end`}>
-                <div className="flex justify-start items-start gap-36">
-                  <div className="w-64 flex justify-start items-end gap-2">
-                    <div className="w-36 px-2 py-4 inline-flex flex-col justify-start items-start gap-2.5">
-                      <div className={`opacity-80 text-center justify-start ${textSub} text-xl font-semibold font-['Rubik']`}>Product Name</div>
-                    </div>
-                  </div>
-                  <div className="px-2 py-4 inline-flex flex-col justify-start items-start gap-2.5">
-                    <div className={`opacity-80 text-center justify-start ${textSub} text-base font-semibold font-['Rubik']`}>Order ID</div>
-                  </div>
-                  <div className="px-2 py-4 inline-flex flex-col justify-center items-center gap-2.5">
-                    <div className={`opacity-80 text-center justify-start ${textSub} text-base font-semibold font-['Rubik']`}>Quantity</div>
-                  </div>
-                </div>
-                <div className="w-20 px-2 py-4 inline-flex flex-col justify-center items-center gap-2.5">
-                  <div className={`opacity-80 text-center justify-start ${textSub} text-base font-semibold font-['Rubik']`}>Total</div>
-                </div>
-              </div>
-
-              {[1, 2].map((i) => (
-                <div key={i} className={`self-stretch border-b-[0.50px] ${border} inline-flex justify-between items-center`}>
-                  <div className="flex justify-start items-start gap-36">
-                    <div className="py-2 flex justify-start items-center gap-4">
-                      <div className="px-2 py-4 flex justify-start items-start gap-2.5">
-                        <div className="w-5 h-5 relative opacity-75">
-                          <div className="w-5 h-5 left-0 top-0 absolute" />
+              {/* Responsive scroll container (Desktop/Tablet) */}
+              <div className="w-full overflow-x-auto hidden sm:block">
+                <div className="min-w-[560px] sm:min-w-[720px]">
+                  <div className={`self-stretch border-b-[0.50px] ${border} flex justify-between items-end`}>
+                    <div className="flex justify-start items-start gap-4 md:gap-36">
+                      <div className="w-40 sm:w-64 flex justify-start items-end gap-2">
+                        <div className="w-28 sm:w-36 px-2 py-3 sm:py-4 inline-flex flex-col justify-start items-start gap-2">
+                          <div className={`opacity-80 text-left ${textSub} text-base sm:text-xl font-semibold font-['Rubik']`}>Product Name</div>
                         </div>
                       </div>
-                      <div className="w-10 h-10 bg-black/20 rounded-lg" />
-                      <div className={`w-36 justify-start ${textMain} text-base font-semibold font-['Open_Sans']`}>Lorem Ipsum</div>
+                      <div className="px-2 py-3 sm:py-4 inline-flex flex-col justify-start items-start gap-2">
+                        <div className={`opacity-80 text-left ${textSub} text-sm sm:text-base font-semibold font-['Rubik']`}>Order ID</div>
+                      </div>
+                      <div className="px-2 py-3 sm:py-4 inline-flex flex-col justify-center items-center gap-2">
+                        <div className={`opacity-80 text-left ${textSub} text-sm sm:text-base font-semibold font-['Rubik']`}>Quantity</div>
+                      </div>
                     </div>
-                    <div className="w-20 h-16 px-2 py-4 inline-flex flex-col justify-center items-center gap-2.5">
-                      <div className={`text-center justify-start ${textMain} text-sm font-semibold font-['Open_Sans']`}>#25421</div>
-                    </div>
-                    <div className="w-20 h-16 px-2 py-4 inline-flex flex-col justify-center items-center gap-2.5">
-                      <div className={`text-center justify-start ${textMain} text-base font-semibold font-['Open_Sans']`}>2</div>
+                    <div className="w-16 sm:w-20 px-2 py-3 sm:py-4 inline-flex flex-col justify-center items-center gap-2">
+                      <div className={`opacity-80 text-center ${textSub} text-sm sm:text-base font-semibold font-['Rubik']`}>Total</div>
                     </div>
                   </div>
-                  <div className="w-20 h-16 px-2 py-4 inline-flex flex-col justify-center items-center gap-2.5">
-                    <div className={`text-center justify-start ${textMain} text-base font-semibold font-['Open_Sans']`}>₹800.40</div>
-                  </div>
+
+                  {[1, 2].map((i) => (
+                    <div key={i} className={`self-stretch border-b-[0.50px] ${border} flex justify-between items-center`}>
+                      <div className="flex justify-start items-start gap-4 md:gap-36">
+                        <div className="py-2 flex justify-start items-center gap-3 sm:gap-4">
+                          <div className="px-2 py-3 sm:py-4 flex justify-start items-start gap-2">
+                            <div className="w-5 h-5 relative opacity-75">
+                              <div className="w-5 h-5 left-0 top-0 absolute" />
+                            </div>
+                          </div>
+                          <div className="w-9 h-9 sm:w-10 sm:h-10 bg-black/20 rounded-lg" />
+                          <div className={`w-28 sm:w-36 ${textMain} text-sm sm:text-base font-semibold font-['Open_Sans']`}>Lorem Ipsum</div>
+                        </div>
+                        <div className="w-16 sm:w-20 h-14 sm:h-16 px-2 py-3 sm:py-4 inline-flex flex-col justify-center items-center gap-2">
+                          <div className={`${textMain} text-xs sm:text-sm font-semibold font-['Open_Sans']`}>#25421</div>
+                        </div>
+                        <div className="w-16 sm:w-20 h-14 sm:h-16 px-2 py-3 sm:py-4 inline-flex flex-col justify-center items-center gap-2">
+                          <div className={`${textMain} text-sm sm:text-base font-semibold font-['Open_Sans']`}>2</div>
+                        </div>
+                      </div>
+                      <div className="w-16 sm:w-20 h-14 sm:h-16 px-2 py-3 sm:py-4 inline-flex flex-col justify-center items-center gap-2">
+                        <div className={`${textMain} text-sm sm:text-base font-semibold font-['Open_Sans']`}>₹800.40</div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
 
               {/* Total footer */}
               <div className="w-full flex justify-end items-center pt-4">

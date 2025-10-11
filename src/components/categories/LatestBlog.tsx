@@ -34,7 +34,7 @@ export default function LatestBlog({ items }: { items?: Blog[] }) {
     ]
 
   return (
-    <section className="mx-auto w-full max-w-[1330px] px-4 sm:px-6 lg:px-8 py-6 -ml-20 md:-ml-6">
+    <section className="mx-auto w-full max-w-[1330px] px-4 sm:px-6 lg:px-8 py-6 ml-0 lg:-ml-6">
       <div className="flex items-end justify-between">
         <div>
           <h2 className="text-2xl font-bold tracking-tight">
@@ -52,8 +52,8 @@ export default function LatestBlog({ items }: { items?: Blog[] }) {
       <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
         {data.map((b, i) => (
           <article key={i} className="rounded-md outline outline-1 outline-zinc-100 bg-white shadow-sm overflow-hidden">
-            <div className="aspect-[294/221] w-full overflow-hidden">
-              <img src={b.image} alt={b.title} className="h-full w-full object-cover" />
+            <div className="w-full h-36 sm:h-40 lg:h-44 overflow-hidden">
+              <img src={b.image} alt={b.title} className="h-full w-full object-cover" loading="lazy" />
             </div>
             <div className="p-3">
               <h3 className="text-green-400 text-sm sm:text-base font-medium leading-snug">{b.title}</h3>
@@ -64,6 +64,10 @@ export default function LatestBlog({ items }: { items?: Blog[] }) {
             </div>
           </article>
         ))}
+      </div>
+      {/* Mobile 'All Blogs' button */}
+      <div className="mt-4 sm:hidden">
+        <button className="w-full h-10 rounded-lg bg-white outline outline-1 outline-zinc-200 text-neutral-700 text-sm">All Blogs</button>
       </div>
     </section>
   )

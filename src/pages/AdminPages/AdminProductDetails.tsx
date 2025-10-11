@@ -5,6 +5,7 @@ import DashboardSidebar from '../../components/Admin/DashboardSidebar'
 export default function AdminProductDetailsPage() {
   const { id = '1' } = useParams()
   const [isDark, setIsDark] = useState<boolean>(false)
+  const [mobileOpen, setMobileOpen] = useState<boolean>(false)
   const [imagePreviews, setImagePreviews] = useState<string[]>([])
 
   useEffect(() => {
@@ -36,10 +37,47 @@ export default function AdminProductDetailsPage() {
   return (
     <main className="home-zoom overflow-x-hidden"> 
     <div className={isDark ? 'dark' : ''}>
-      <div className={`w-351 min-h-screen ${frameBg}`}>
+      <div className={`w-screen lg:w-351 min-h-screen ${frameBg}`}>
         <div className="flex w-full min-h-full">
           {/* Sidebar */}
-          <DashboardSidebar isDark={isDark} active="products" />
+          <aside className="home-zoom hidden lg:block">
+            <DashboardSidebar isDark={isDark} active="products" />
+          </aside>
+
+          {/* Mobile sidebar (drawer) */}
+          {mobileOpen && (
+            <div className="fixed inset-0 z-50 lg:hidden">
+              <div className="absolute inset-0 bg-black/40" onClick={() => setMobileOpen(false)} aria-hidden="true" />
+              <div className={`absolute left-0 top-0 h-full w-80 max-w-[80%] ${isDark ? 'bg-slate-800' : 'bg-white'} shadow-xl`}>
+                <div className="flex items-center justify-between px-3 py-3 border-b border-slate-200 dark:border-slate-700">
+                  <span className={`text-sm font-medium ${isDark ? 'text-slate-200' : 'text-slate-800'}`}>Menu</span>
+                  <button
+                    className="p-2 rounded-md hover:bg-black/5 dark:hover:bg-white/10"
+                    aria-label="Close menu"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={`h-5 w-5 ${isDark ? 'text-slate-200' : 'text-slate-700'}`}>
+                      <path d="M6 6l12 12M6 18L18 6" />
+                    </svg>
+                  </button>
+                </div>
+                <div className="h-[calc(100%-56px)] overflow-y-auto">
+                  <DashboardSidebar isDark={isDark} active="products" />
+                </div>
+              </div>
+            </div>
+          )}
+          {/* Mobile menu button */}
+          <button
+            type="button"
+            className="lg:hidden inline-flex items-center justify-center p-2 rounded-md hover:bg-black/5 dark:hover:bg-white/10 fixed top-2 left-2 z-50"
+            aria-label="Open menu"
+            onClick={() => setMobileOpen(true)}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={`${isDark ? 'text-slate-200' : 'text-slate-700'} h-5 w-5`}>
+              <path d="M3 6h18M3 12h18M3 18h18" />
+            </svg>
+          </button>
 
           {/* Main content */}
           <main className="flex-1 p-6 flex flex-col gap-5">

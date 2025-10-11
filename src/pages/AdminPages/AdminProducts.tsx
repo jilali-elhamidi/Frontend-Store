@@ -7,6 +7,7 @@ export default function AdminProductsPage() {
   const [showFilters, setShowFilters] = useState<boolean>(true)
   const [query, setQuery] = useState<string>('')
   const [selectedCats, setSelectedCats] = useState<Set<string>>(new Set())
+  const [mobileOpen, setMobileOpen] = useState<boolean>(false)
 
   useEffect(() => {
     const saved = localStorage.getItem('theme')
@@ -144,16 +145,49 @@ export default function AdminProductsPage() {
   return (
     <main className="home-zoom overflow-x-hidden">  
     <div className={isDark ? 'dark' : ''}>
-      <div className={`w-351 min-h-screen ${frameBg}`}>
-        <div className="flex w-full min-h-full">
-          {/* Sidebar */}
-          <DashboardSidebar isDark={isDark} active="products" />
+      <div className={`w-screen lg:w-351 min-h-screen ${frameBg}`}>
+        <div className="flex flex-col lg:flex-row w-full min-h-full">
+          {/* Sidebar (desktop) */}
+          <aside className="hidden lg:block">
+            <DashboardSidebar isDark={isDark} active="products" />
+          </aside>
+
+          {/* Sidebar (mobile drawer) */}
+          {mobileOpen && (
+            <div className="fixed inset-0 z-50 lg:hidden">
+              <div className="absolute inset-0 bg-black/40" onClick={() => setMobileOpen(false)} aria-hidden="true" />
+              <div className={`${isDark ? 'bg-slate-800' : 'bg-white'} absolute left-0 top-0 h-full w-72 max-w-[85%] shadow-xl` }>
+                <div className="flex items-center justify-between px-4 py-3 border-b border-slate-200 dark:border-slate-700">
+                  <span className={`text-sm font-medium ${isDark ? 'text-slate-200' : 'text-slate-800'}`}>Menu</span>
+                  <button className="p-2 rounded-md hover:bg-black/5 dark:hover:bg-white/10" onClick={() => setMobileOpen(false)}>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={`h-5 w-5 ${isDark ? 'text-slate-200' : 'text-slate-700'}`}>
+                      <path d="M6 6l12 12M6 18L18 6" />
+                    </svg>
+                  </button>
+                </div>
+                <DashboardSidebar isDark={isDark} active="products" />
+              </div>
+            </div>
+          )}
 
           {/* Main content */}
-          <main className="flex-1 p-6 flex flex-col gap-5">
+          <main className="flex-1 p-4 sm:p-6 flex flex-col gap-4 sm:gap-5">
+            {/* Top bar */}
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                className="lg:hidden inline-flex items-center justify-center p-2 rounded-md hover:bg-black/5 dark:hover:bg-white/10"
+                onClick={() => setMobileOpen(true)}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={`h-5 w-5 ${isDark ? 'text-slate-200' : 'text-slate-700'}`}>
+                  <path d="M3 6h18M3 12h18M3 18h18" />
+                </svg>
+              </button>
+              <h1 className={`text-lg sm:text-xl font-semibold ${isDark ? 'text-slate-100' : 'text-slate-900'}`}>Products</h1>
+            </div>
             {/* Header */}
-            <div className="inline-flex flex-col justify-start items-start gap-4 w-full">
-              <div className="inline-flex justify-between items-center w-full gap-6">
+            <div className="flex flex-col gap-3 w-full">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between w-full gap-3 sm:gap-6">
                 {/* Title + breadcrumb */}
                 <div className="inline-flex flex-col justify-start items-start gap-1">
                   <div className={`justify-start ${textSub} text-2xl font-semibold font-['Rubik']`}>All Products</div>
@@ -173,7 +207,7 @@ export default function AdminProductsPage() {
                   </div>
                 </div>
                 {/* Date + actions */}
-                <div className={`flex items-center gap-4 ${textSub}`}>
+                <div className={`flex items-center gap-3 sm:gap-4 ${textSub}`}>
                   <div className="w-6 h-6 flex items-center justify-center">
                     {/* Calendar icon */}
                     <svg viewBox="0 0 24 24" className={`${isDark ? 'text-slate-300/80' : 'text-neutral-800'} w-5 h-5`} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -206,11 +240,54 @@ export default function AdminProductsPage() {
               </div>
             </div>
 
+            {/* Mobile filters (shown above cards) */}
+            {showFilters && (
+              <div className="lg:hidden w-full">
+                <div className={`${cardBg} dark:bg-slate-900/40 rounded-2xl p-4 w-full`}> 
+                  <div className="w-full inline-flex justify-between items-center">
+                    <div className={`justify-start ${textSub} text-xl font-semibold font-['Rubik']`}>Categories</div>
+                    <button
+                      onClick={() => setShowFilters(false)}
+                      className={`text-sm rounded-lg px-3 py-1 transition-colors ${isDark ? 'bg-slate-800 text-slate-200 hover:bg-slate-700 outline outline-1 outline-slate-700' : 'bg-white text-neutral-700 hover:bg-neutral-50 outline outline-1 outline-neutral-200'} dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700 dark:outline dark:outline-1 dark:outline-slate-700`}
+                    >
+                      Collapse
+                    </button>
+                  </div>
+                  <div className="mt-4 flex flex-col justify-start items-stretch gap-3">
+                    {categories.map(({ name, count }) => {
+                      const active = selectedCats.has(name)
+                      return (
+                        <button
+                          key={name}
+                          onClick={() => toggleCat(name)}
+                          className={`w-full inline-flex justify-between items-center rounded-xl px-4 py-2 transition-colors ${isDark
+                            ? `${active ? 'bg-slate-800' : 'bg-slate-800/60 hover:bg-slate-700/60'} outline outline-1 outline-slate-700`
+                            : `${active ? 'bg-neutral-100' : 'bg-white hover:bg-neutral-50'} outline outline-1 outline-neutral-200`
+                            } dark:bg-slate-800/60 dark:hover:bg-slate-700/60 dark:outline dark:outline-1 dark:outline-slate-700 ${active ? 'dark:bg-slate-800' : ''}`}
+                        >
+                          <div className={`justify-start ${textSub} text-base font-semibold font-['Open_Sans'] ${active ? 'underline' : ''}`}>{name}</div>
+                          <div className={`w-10 h-9 p-2 ${active
+                            ? (isDark ? 'bg-sky-700 text-white' : 'bg-sky-900 text-white')
+                            : (isDark ? 'bg-slate-800 text-slate-200' : 'bg-stone-200 text-neutral-800')
+                            } dark:bg-slate-800 dark:text-slate-200 ${active ? 'dark:bg-sky-700 dark:text-white' : ''} rounded inline-flex flex-col justify-center items-center gap-2.5`}>
+                            <div className={`justify-start text-sm font-semibold font-['Open_Sans']`}>{String(count).padStart(2, '0')}</div>
+                          </div>
+                        </button>
+                      )
+                    })}
+                    {selectedCats.size > 0 && (
+                      <button onClick={() => setSelectedCats(new Set())} className={`text-sm self-start ${isDark ? 'text-sky-300' : 'text-sky-700'}`}>Clear filters</button>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
+
             {/* Content grid */}
             <div className={`w-full ${showFilters ? 'grid grid-cols-1 lg:grid-cols-[1fr_320px]' : 'block'} gap-4 items-start`}>
               {/* Cards column */}
               <div className="flex flex-col gap-4">
-                <div className={`grid grid-cols-1 ${showFilters ? 'md:grid-cols-2 xl:grid-cols-3' : 'md:grid-cols-3 xl:grid-cols-3'} auto-rows-fr items-stretch gap-4`}>
+                <div className={`grid grid-cols-1 ${showFilters ? 'sm:grid-cols-2 xl:grid-cols-3' : 'sm:grid-cols-3 xl:grid-cols-3'} auto-rows-fr items-stretch gap-4`}>
                   {filtered.map((p) => (
                     <Link key={p.id} to={`/admin/products/${p.id}`} className="block h-full min-w-0">
                       <ProductCard product={p} />
@@ -219,7 +296,7 @@ export default function AdminProductsPage() {
                 </div>
 
                 {/* Pagination */}
-                <div className="inline-flex justify-start items-center gap-4">
+                <div className="flex flex-wrap justify-start items-center gap-2 sm:gap-4">
                   <div className="inline-flex flex-col justify-start items-start gap-2.5">
                     <div className="h-8 px-4 py-2 bg-neutral-800 rounded-lg inline-flex justify-center items-center gap-1">
                       <div className="justify-start text-white text-sm font-medium font-['Inter'] uppercase tracking-tight">1</div>
@@ -252,7 +329,7 @@ export default function AdminProductsPage() {
 
               {/* Categories sidebar */}
               {showFilters && (
-                <div className={`${cardBg} dark:bg-slate-900/40 rounded-2xl p-4 w-full`}>
+                <div className={`${cardBg} dark:bg-slate-900/40 rounded-2xl p-4 w-full hidden lg:block`}>
                   <div className="w-full inline-flex justify-between items-center">
                     <div className={`justify-start ${textSub} text-xl font-semibold font-['Rubik']`}>Categories</div>
                     <button

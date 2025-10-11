@@ -13,7 +13,7 @@ import {
 
 function FeatureItem({ icon, title }: { icon: React.ReactNode; title: string }) {
   return (
-    <div className="flex items-center gap-3 px-4">
+    <div className="flex items-center gap-3 px-2 sm:px-4">
       <div className="text-orange-400">{icon}</div>
       <div className="text-sm uppercase text-black">{title}</div>
     </div>
@@ -26,8 +26,8 @@ function Footer() {
       <section className="mx-auto w-full max-w-[1330px] px-4 sm:px-6 lg:px-8">
         {/* Top feature bar */}
         <div className="relative w-full">
-          <div className="h-32 w-full border-b border-zinc-200 flex items-center justify-between">
-            <div className="flex w-full items-center justify-between">
+          <div className="w-full border-b border-zinc-200 py-6">
+            <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 md:gap-8">
               <FeatureItem icon={<FaShippingFast size={18} />} title="Free Shipping over $99" />
               <div className="hidden md:block h-5 w-px bg-zinc-200" />
               <FeatureItem icon={<FaUndoAlt size={18} />} title="30 Days money back" />

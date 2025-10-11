@@ -1,18 +1,144 @@
-import React from 'react'
+import React, { useState } from 'react'
 import DashboardSidebar from '../../components/Admin/DashboardSidebar'
 
 export default function AdminShippingPage() {
+  const [mobileOpen, setMobileOpen] = useState(false)
   return (
-    <main className="home-zoom ">  
-    <div className="w-351 min-h-screen bg-teal-50 overflow-y-hidden">
+    <main className="home-zoom overflow-x-hidden">  
+    <div className="w-screen lg:w-351 min-h-screen bg-teal-50 overflow-y-hidden relative">
       {/* Sidebar pinned exactly inside the green zone */}
-      <aside className="absolute left-0 top-0 h-full w-[280px]">
+      <aside className="hidden lg:block absolute left-0 top-0 h-full w-[280px]">
         <DashboardSidebar active="shipping" />
       </aside>
 
+      {/* Mobile sidebar (drawer) */}
+      {mobileOpen && (
+        <div className="fixed inset-0 z-50 lg:hidden">
+          <div className="absolute inset-0 bg-black/40" onClick={() => setMobileOpen(false)} aria-hidden="true" />
+          <div className="absolute left-0 top-0 h-full w-80 max-w-[80%] bg-white shadow-xl">
+            <div className="flex items-center justify-between px-3 py-3 border-b border-slate-200">
+              <span className="text-sm font-medium text-slate-800">Menu</span>
+              <button className="p-2 rounded-md hover:bg-black/5" aria-label="Close menu" onClick={() => setMobileOpen(false)}>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-5 w-5 text-slate-700">
+                  <path d="M6 6l12 12M6 18L18 6" />
+                </svg>
+              </button>
+            </div>
+            <div className="h-[calc(100%-56px)] overflow-y-auto">
+              <DashboardSidebar active="shipping" />
+            </div>
+          </div>
+        </div>
+      )}
+      {/* Mobile menu button */}
+      <button
+        type="button"
+        className="lg:hidden inline-flex items-center justify-center p-2 rounded-md hover:bg-black/5 fixed top-2 left-2 z-50"
+        aria-label="Open menu"
+        onClick={() => setMobileOpen(true)}
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-5 w-5 text-slate-700">
+          <path d="M3 6h18M3 12h18M3 18h18" />
+        </svg>
+      </button>
+
       {/* Content area to the right of the sidebar */}
-      <main className="relative ml-[280px]">
-        <div className="w-full h-[1200px] relative bg-teal-50 -translate-x-[60px]">
+      <main className="relative ml-0 lg:ml-[280px]">
+        {/* Mobile layout (stacked, no horizontal scroll) */}
+        <div className="sm:hidden w-full px-4 py-5 space-y-4">
+          {/* Header */}
+          <div className="flex items-center justify-between">
+            <h1 className="text-gray-900 text-2xl font-bold font-['Plus_Jakarta_Sans']">Logistics</h1>
+            <button className="inline-flex items-center gap-2 bg-indigo-500 text-white text-sm font-semibold rounded-xl px-3 py-2 shadow">
+              <span>Add Vehicle</span>
+            </button>
+          </div>
+
+          {/* KPI Cards */}
+          <div className="grid grid-cols-2 gap-3">
+            <div className="bg-white rounded-2xl p-4 shadow">
+              <div className="text-2xl font-bold text-gray-900">38</div>
+              <div className="text-sm text-gray-500">On route vehicles</div>
+            </div>
+            <div className="bg-white rounded-2xl p-4 shadow">
+              <div className="text-2xl font-bold text-gray-900">2</div>
+              <div className="text-sm text-gray-500">Vehicles with errors</div>
+            </div>
+            <div className="bg-white rounded-2xl p-4 shadow">
+              <div className="text-2xl font-bold text-gray-900">1</div>
+              <div className="text-sm text-gray-500">Deviated from route</div>
+            </div>
+            <div className="bg-white rounded-2xl p-4 shadow">
+              <div className="text-2xl font-bold text-gray-900">2</div>
+              <div className="text-sm text-gray-500">Late vehicles</div>
+            </div>
+          </div>
+
+          {/* Vehicles Overview (compact) */}
+          <div className="bg-white rounded-2xl p-4 shadow">
+            <div className="text-base font-bold text-gray-900 mb-2">Vehicles Overview</div>
+            <div className="space-y-2 text-sm">
+              <div className="flex justify-between"><span className="text-gray-500">Total</span><span className="font-semibold text-gray-900">100</span></div>
+              <div className="flex justify-between"><span className="text-gray-500">Available</span><span className="font-semibold text-gray-900">38</span></div>
+              <div className="flex justify-between"><span className="text-gray-500">Out of service</span><span className="font-semibold text-gray-900">50</span></div>
+              <div className="flex justify-between"><span className="text-gray-500">On route</span><span className="font-semibold text-gray-900">12</span></div>
+            </div>
+          </div>
+
+          {/* Vehicles Condition (already flex) */}
+          <div className="bg-white rounded-2xl p-4 shadow">
+            <div className="text-base font-bold text-gray-900">Vehicles Condition</div>
+            <div className="mt-3 space-y-3">
+              <div className="flex items-center gap-3">
+                <div className="min-w-20 text-indigo-600 font-semibold text-sm">Very good</div>
+                <div className="flex-1 h-2 rounded bg-gray-200 overflow-hidden"><div className="h-2 bg-indigo-500" style={{ width: '83%' }} /></div>
+                <div className="w-12 text-right text-gray-900 font-bold text-sm">181</div>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="min-w-20 text-amber-600 font-semibold text-sm">Good</div>
+                <div className="flex-1 h-2 rounded bg-gray-200 overflow-hidden"><div className="h-2 bg-amber-500" style={{ width: '11%' }} /></div>
+                <div className="w-12 text-right text-gray-900 font-bold text-sm">24</div>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="min-w-20 text-red-600 font-semibold text-sm">Bad</div>
+                <div className="flex-1 h-2 rounded bg-gray-200 overflow-hidden"><div className="h-2 bg-red-500" style={{ width: '6%' }} /></div>
+                <div className="w-12 text-right text-gray-900 font-bold text-sm">12</div>
+              </div>
+            </div>
+          </div>
+
+          {/* On Route Vehicles: mobile cards */}
+          <div className="bg-white rounded-2xl p-4 shadow">
+            <div className="text-base font-bold text-gray-900">On Route Vehicles</div>
+            <div className="text-xs text-gray-500 mb-3">Condition and temperature</div>
+            <div className="space-y-3">
+              {[1,2,3].map((n) => (
+                <div key={n} className="rounded-xl border border-gray-200 p-3">
+                  <div className="flex items-center justify-between text-sm font-medium text-gray-900">
+                    <span>{`VOL-653CD${n}`}</span>
+                    <span className="text-gray-700">Very Good • 8°C</span>
+                  </div>
+                  <div className="mt-2 grid grid-cols-2 gap-2 text-xs text-gray-700">
+                    <div>
+                      <div className="opacity-70">Starting Route</div>
+                      <div>Cleveland, Ohio, USA</div>
+                    </div>
+                    <div className="text-right">
+                      <div className="opacity-70">Ending Route</div>
+                      <div>Cleveland, Ohio, USA</div>
+                    </div>
+                  </div>
+                  <div className="mt-2 text-xs">
+                    <span className="inline-block px-2 py-1 rounded-full bg-emerald-500/10 text-emerald-700 uppercase font-semibold tracking-wide">No warnings</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Original desktop layout */}
+        <div className="hidden sm:block w-full h-[1200px] relative bg-teal-50 lg:-translate-x-[90px]">
           <div className="w-full h-20 left-[8px] top-[48px] absolute">
             <div className="w-36 h-10 left-[15.99px] top-[15.99px] absolute justify-center text-gray-900 text-4xl font-bold font-['Plus_Jakarta_Sans'] leading-10">Logistics</div>
             <div className="w-36 h-10 right-4 top-[15.99px] absolute bg-indigo-500 rounded-xl shadow-[0px_1px_5px_0px_rgba(0,0,0,0.08)]">

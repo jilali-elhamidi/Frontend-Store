@@ -35,7 +35,7 @@ export default function PromoBanners({
   const data = { left: { ...defaults.left, ...left }, right: { ...defaults.right, ...right } }
 
   const Card = ({ item }: { item: Promo }) => (
-    <div className="relative w-full h-44 md:h-48 bg-zinc-100 rounded-xl overflow-hidden shadow-sm -ml-20 md:-ml-10">
+    <div className="relative w-full h-44 md:h-48 bg-zinc-100 rounded-xl overflow-hidden shadow-sm ml-0 md:-ml-10">
       {/* decorative circle */}
       <div className="absolute -right-20 -top-12 h-64 w-64 rounded-full bg-white/50" />
 
